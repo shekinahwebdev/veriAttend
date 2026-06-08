@@ -1,0 +1,204 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Institution {
+  id          String  @id @default(uuid())
+  name        String  @unique
+  shortName   String? @unique
+  phoneNumber String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  departments Department[]
+}
+
+model Department {
+  id String @id @default(uuid())
+
+  name String
+  code String
+
+  institutionId String
+  institution   Institution @relation(fields: [institutionId], references: [id])
+
+  groups AcademicGroup[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // This line creates the composite unique constraint
+  @@unique([institutionId, id])
+}
+
+model AcademicGroup {
+  id String @id @default(uuid())
+
+  name  String
+  level Int
+
+  departmentId String
+  department   Department @relation(fields: [departmentId], references: [id])
+
+  students  User[]
+  offerings CourseOffering[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([departmentId, id])
+}
+
+enum Role {
+  STUDENT
+  LECTURER
+  ADMIN
+}
+
+enum GroupRole {
+  MEMBER
+  MAIN_REP
+  ASSISTANT_REP
+}
+
+model User {
+  id String @id @default(uuid())
+
+  firstName String
+  lastName  String
+
+  email    String @unique
+  password String
+
+  role Role
+
+  groupRole GroupRole?
+
+  studentId String? @unique
+
+  academicGroupId String?
+  academicGroup   AcademicGroup? @relation(fields: [academicGroupId], references: [id])
+
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  courseOfferings    CourseOffering[]
+  enrollments        Enrollment[]
+  attendanceSessions AttendanceSession[]
+  attendanceRecords  AttendanceRecord[]
+}
+
+model Course {
+  id String @id @default(uuid())
+
+  courseCode String @unique
+  courseName String
+
+  creditHours Int?
+
+  offerings CourseOffering[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model CourseOffering {
+  id String @id @default(uuid())
+
+  courseId String
+  course   Course @relation(fields: [courseId], references: [id])
+
+  lecturerId String
+  lecturer   User   @relation(fields: [lecturerId], references: [id])
+
+  academicGroupId String
+  academicGroup   AcademicGroup @relation(fields: [academicGroupId], references: [id])
+
+  semester     Int
+  academicYear String
+
+  enrollments Enrollment[]
+  sessions    AttendanceSession[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([courseId, academicGroupId, semester, academicYear])
+}
+
+model Enrollment {
+  id String @id @default(uuid())
+
+  studentId String
+  student   User   @relation(fields: [studentId], references: [id])
+
+  courseOfferingId String
+  courseOffering   CourseOffering @relation(fields: [courseOfferingId], references: [id])
+
+  createdAt DateTime @default(now())
+
+  @@unique([studentId, courseOfferingId])
+}
+
+enum SessionStatus {
+  ACTIVE
+  CLOSED
+}
+
+model AttendanceSession {
+  id String @id @default(uuid())
+
+  courseOfferingId String
+  courseOffering   CourseOffering @relation(fields: [courseOfferingId], references: [id])
+
+  startedById String
+  startedBy   User   @relation(fields: [startedById], references: [id])
+
+  attendanceCode String @unique
+
+  latitude  Float?
+  longitude Float?
+
+  radius Int?
+
+  status SessionStatus
+
+  startTime DateTime
+  endTime   DateTime?
+
+  records AttendanceRecord[]
+
+  createdAt DateTime @default(now())
+}
+
+enum AttendanceStatus {
+  PRESENT
+  ABSENT
+  LATE
+}
+
+model AttendanceRecord {
+  id String @id @default(uuid())
+
+  attendanceSessionId String
+  attendanceSession   AttendanceSession @relation(fields: [attendanceSessionId], references: [id])
+
+  studentId String
+  student   User   @relation(fields: [studentId], references: [id])
+
+  status AttendanceStatus
+
+  recordedAt DateTime @default(now())
+
+  @@unique([attendanceSessionId, studentId])
+}
