@@ -20,12 +20,12 @@ export default function CompleteScreen() {
       <div className="w-16 h-16 rounded-full bg-primary/10 dark:bg-primary/15 text-primary flex items-center justify-center border border-primary/20 mb-2">
         <CheckCircle2 size={22} className="text-primary" />
       </div>
-      <div className="flex flex-col gap-2 mb-6">
-        <h2 className="text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
+      <div className="flex flex-col gap-2 mb-5 lg:mb-6">
+        <h2 className="text-2xl font-extrabold tracking-tight text-foreground sm:text-4xl text-center">
           Thanks for your interaction!
         </h2>
       </div>
-      <div className="pt-6 flex flex-col gap-4">
+      <div className="lg:pt-6 pt-5 flex flex-col gap-4">
         <div>
           <p className="text-base text-foreground text-center">
             Ready to get started?

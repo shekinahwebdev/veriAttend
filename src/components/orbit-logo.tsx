@@ -27,7 +27,7 @@ export function OrbitLogo() {
         <h2 className="text-2xl font-bold tracking-tight text-foreground">
           Veri<span className="text-primary">Attend</span>
         </h2>
-        <p className="text-xs font-medium text-muted-foreground tracking-wider uppercase mt-1">
+        <p className="text-xs font-medium text-muted-foreground mt-1">
           Let's personalize your attendance experience in under a minute.
         </p>
       </div>
