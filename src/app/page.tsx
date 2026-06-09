@@ -1,7 +1,5 @@
-import OnboardingContainer from "@/app/onboarding/page";
+import { redirect } from "next/navigation";
 
-export const OnboardingPage = () => {
-  return <OnboardingContainer />;
-};
-
-export default OnboardingPage;
+export default function RootPage() {
+  redirect("/onboarding");
+}

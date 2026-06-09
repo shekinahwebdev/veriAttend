@@ -1,22 +1,39 @@
 "use client";
-import { useState } from "react";
-import { ArrowRight, ArrowLeft, CheckCircle2 } from "lucide-react";
-import { onboardingQuestions, UserRole } from "@/features/onboarding/questions";
 
-interface RoleQuestionsProps {
-  role: UserRole;
-  onBack: () => void;
-  onComplete: (answers: Record<number, string>) => void;
-}
+import { useState, useEffect } from "react";
+import { ArrowRight, ArrowLeft } from "lucide-react";
+import { onboardingQuestions } from "@/features/onboarding/questions";
+import { useOnboardingStore } from "@/store/useOnboardingStore";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-export default function RoleQuestions({
-  role,
-  onBack,
-  onComplete,
-}: RoleQuestionsProps) {
-  const questions = onboardingQuestions[role] || [];
-  const [currentStep, setCurrentStep] = useState(0);
-  const [answers, setAnswers] = useState<Record<number, string>>({});
+export default function RoleQuestionsContent() {
+  const { selectedRole, setCapturedAnswer, capturedAnswers } =
+    useOnboardingStore();
+  const pathName = usePathname();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  // handle user crash issue
+  const questions = selectedRole ? onboardingQuestions[selectedRole] : [];
+  const currentStep = Number(searchParams.get("step") || 0);
+  const [answers, setAnswers] = useState<Record<number, string>>(
+    () => capturedAnswers || {},
+  );
+  const [IsMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  // redirecting user to the onboarding page if selectedRole state un-hydrates
+  useEffect(() => {
+    if (!IsMounted) return;
+
+    if (!selectedRole) {
+      router.replace("/onboarding");
+    }
+    console.log("Role", selectedRole);
+  }, [selectedRole, router, IsMounted]);
 
   const activeQuestion = questions[currentStep];
   const totalSteps = questions.length;
@@ -25,24 +42,35 @@ export default function RoleQuestions({
     totalSteps > 0 ? ((currentStep + 1) / totalSteps) * 100 : 0;
 
   const handleOptionSelect = (option: string) => {
-    setAnswers((prev) => ({ ...prev, [currentStep]: option }));
+    const updatedAnswers = { ...answers, [currentStep]: option };
+
+    setAnswers(updatedAnswers);
+    setCapturedAnswer(updatedAnswers);
   };
 
   const handleNext = () => {
     if (currentStep < totalSteps - 1) {
-      setCurrentStep((prev) => prev + 1);
+      const nextStep = currentStep + 1;
+      router.push(`${pathName}?step=${nextStep}`);
     } else {
-      onComplete(answers);
+      // save answers map to Zustand
+      setCapturedAnswer(answers);
+      console.log(answers);
+
+      router.push("/onboarding/complete");
     }
   };
 
   const handlePrev = () => {
     if (currentStep > 0) {
-      setCurrentStep((prev) => prev - 1);
+      const prevStep = currentStep - 1;
+      router.push(`${pathName}?step=${prevStep}`);
     } else {
-      onBack();
+      router.push("/onboarding");
     }
   };
+
+  if (!selectedRole || !activeQuestion) return null;
 
   const hasSelectedCurrentOption = answers[currentStep] !== undefined;
 
@@ -64,21 +92,23 @@ export default function RoleQuestions({
           Question {currentStep + 1} of {totalSteps}
         </span>
       </div>
+
       <div className="w-full h-1 bg-muted dark:bg-slate-800 rounded-full overflow-hidden mb-8">
         <div
           className="h-full bg-primary transition-all duration-500 ease-out rounded-full shadow-[0_0_8px_rgba(37,99,235,0.4)]"
           style={{ width: `${progressPercentage}%` }}
         />
       </div>
+
       <h2 className="text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl min-h-[4.5rem]">
-        {activeQuestion?.title}
+        {activeQuestion.title}
       </h2>
       <p className="mt-2 text-muted-foreground text-sm">
         Choose the choice that best matches your daily operations.
       </p>
 
       <div className="mt-8 space-y-3">
-        {activeQuestion?.options.map((option) => {
+        {activeQuestion.options.map((option) => {
           const isSelected = answers[currentStep] === option;
           return (
             <button
@@ -87,7 +117,7 @@ export default function RoleQuestions({
               onClick={() => handleOptionSelect(option)}
               className={`w-full text-left p-4 rounded-xl border transition-all duration-200 cursor-pointer select-none flex items-center justify-between group ${
                 isSelected
-                  ? "border-primary bg-primary/5 dark:bg-primary/1 text-foreground font-semibold"
+                  ? "border-primary bg-primary/5 dark:bg-primary/10 text-foreground font-semibold"
                   : "border-border dark:border-slate-800 bg-card text-muted-foreground hover:text-foreground hover:border-border"
               }`}
             >
@@ -107,6 +137,7 @@ export default function RoleQuestions({
           );
         })}
       </div>
+
       <div className="mt-8 pt-6 border-t border-border/60 dark:border-slate-800/60 flex items-center justify-between">
         <span className="text-xs text-muted-foreground italic">
           {hasSelectedCurrentOption
