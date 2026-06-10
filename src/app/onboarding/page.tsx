@@ -53,32 +53,72 @@ export default function OnboardingContainer() {
 
   useEffect(() => {
     setMounted(true);
+
+    // Captures users selected roles on first mount
     if (selectedRole) {
       const targetIndex = roles.findIndex((r) => r.id === selectedRole);
       if (targetIndex !== -1) setActiveIndex(targetIndex);
+
+      // changes step states when user selected role is 'student'
+      if (selectedRole === "student") {
+        setStep("studentGroup");
+      }
     }
+
+    // Captures users selected group role on first mount
     if (selectedGroupRole) {
       const targetIndex = groupRoles.findIndex(
         (g) => g.id === selectedGroupRole,
       );
       if (targetIndex !== -1) setGroupActiveIndex(targetIndex);
     }
-  }, [selectedRole, selectedGroupRole]);
+  }, []);
 
+  // function to handle role select: select roles and group role
+  const handleRoleSelect = (roleId: UserRole, index: number) => {
+    setActiveIndex(index);
+    setSelectedRole(roleId);
+
+    // User navigates to main board, groupRole and index is reset
+    if (roleId !== "student") {
+      setSelectedGroupRole("");
+      setGroupActiveIndex(0);
+    }
+  };
+
+  // Hanldes go back button: resets the groupRole when user goes to the main board
+  const handleGoBack = () => {
+    setSelectedGroupRole("");
+    setGroupActiveIndex(0);
+    setStep("role");
+  };
+
+  // Handles user navigation between login and signUp page
   const handleContinue = (action: any) => {
     if (action === "login") {
       router.push("/login");
       return;
     }
 
+    // handles user step states
     if (step === "role") {
       if (selectedRole === "student") {
         setStep("studentGroup");
       } else {
-        router.push("/signu");
+        router.push(`/auth/signup?role=${selectedRole}`);
       }
-    } else {
-      router.push("/dashboard");
+    } else if (step === "studentGroup") {
+      if (
+        selectedGroupRole === "MEMBER" ||
+        selectedGroupRole === "MAIN_REP" ||
+        selectedGroupRole === "ASSISTANT_REP"
+      ) {
+        router.push(
+          `/auth/signup?role=${selectedRole}&groupRole=${selectedGroupRole}`,
+        );
+      } else {
+        router.push("/dashboard");
+      }
     }
   };
 
@@ -132,10 +172,11 @@ export default function OnboardingContainer() {
                 <button
                   key={role.id}
                   type="button"
-                  onClick={() => {
-                    setSelectedRole(role.id);
-                    setActiveIndex(idx);
-                  }}
+                  // onClick={() => {
+                  //   setSelectedRole(role.id);
+                  //   setActiveIndex(idx);
+                  // }}
+                  onClick={() => handleRoleSelect(role.id, idx)}
                   className={`flex-1 relative z-10 flex flex-col items-center md:items-start text-center md:text-left p-5 rounded-xl transition-all duration-200 cursor-pointer select-none group ${
                     isSelected
                       ? "bg-card dark:bg-slate-950 md:bg-transparent text-foreground font-medium"
@@ -179,7 +220,8 @@ export default function OnboardingContainer() {
         {step === "studentGroup" ? (
           <button
             type="button"
-            onClick={() => setStep("role")}
+            // onClick={() => setStep("role")}
+            onClick={handleGoBack}
             className="px-4 py-2.5 border border-border/80 text-muted-foreground hover:text-foreground rounded-xl text-sm font-medium hover:bg-accent transition-all flex items-center gap-2 cursor-pointer"
           >
             <ArrowLeft size={14} />

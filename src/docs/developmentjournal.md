@@ -36,3 +36,19 @@
 - Added attributes in the database schema to connect users roles and groups to the institution they belong to, ensuring that data is organized and associated correctly within the system.
 - Added attributes in the database schema to store user captured answers from the onboarding process, allowing for easy retrieval and use of this data in the future.
 - Implemented functionality to capture and store user answers during the onboarding process, ensuring that this data is securely stored and can be accessed when needed, even if the user refreshes the page.
+
+### Feature In Process:
+
+- Implementing signUp and login functionality for users, allowing them to create accounts and access the system securely based on their roles.
+- Implementing role-based access control to ensure that users can only access features and data relevant to their roles, enhancing security and user experience within the system.
+
+### Challenges Faced:
+
+- How to implement syn changes from user select role and group to authentication pagee(signup page) to ensure that the user's selections are accurately reflected in the authentication process and that they can access the appropriate features based on their roles and groups.
+
+### Lessons Learned:
+
+- The importance of designing a flexible and scalable database schema that can accommodate various user roles and groups while maintaining data integrity and organization within the system.
+- Use useSearchParams hook to manage query parameters in the URL, allowing for dynamic updates to the authentication page based on user selections during the onboarding process.
+- The significance of implementing secure authentication mechanisms to protect user data and ensure that users can access the system based on their roles and permissions, enhancing overall security and user experience within the application.
+- Fix the bug of the onboarding process where user selections were not being accurately reflected in the authentication page, ensuring a seamless and consistent user experience throughout the onboarding and authentication process.

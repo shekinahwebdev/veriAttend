@@ -1,5 +1,6 @@
 import { GroupRole } from "@/types/auth";
 import { User, ShieldAlert, ShieldCheck } from "lucide-react";
+import { useEffect } from "react";
 
 export const groupRoles: {
   id: GroupRole;
@@ -42,6 +43,25 @@ export function StudentGroup({
   selectedGroupRole,
   setSelectedGroupRole,
 }: StudentGroupProps) {
+  // handles groupRole state changes
+  useEffect(() => {
+    if (!selectedGroupRole) {
+      onRoleSelect(0);
+    } else {
+      const currentIdx = groupRoles.findIndex(
+        (g) => g.id === selectedGroupRole,
+      );
+      if (currentIdx !== -1 && currentIdx !== activeIndex) {
+        onRoleSelect(currentIdx);
+      }
+    }
+  }, [selectedGroupRole, groupRoles, onRoleSelect]);
+
+  const handleSelection = (roleId: GroupRole, idx: number) => {
+    setSelectedGroupRole(roleId);
+    onRoleSelect(idx);
+  };
+
   return (
     <div className="animate-fade-in">
       <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl">
@@ -70,10 +90,11 @@ export function StudentGroup({
             <button
               key={gRole.id}
               type="button"
-              onClick={() => {
-                setSelectedGroupRole(gRole.id);
-                onRoleSelect(idx);
-              }}
+              // onClick={() => {
+              //   setSelectedGroupRole(gRole.id);
+              //   onRoleSelect(idx);
+              // }}
+              onClick={() => handleSelection(gRole.id, idx)}
               className={`flex-1 relative z-10 flex flex-col items-center md:items-start text-center md:text-left p-5 rounded-xl transition-all duration-200 cursor-pointer select-none group ${
                 isSelected
                   ? "bg-card dark:bg-slate-950 md:bg-transparent text-foreground font-medium"
