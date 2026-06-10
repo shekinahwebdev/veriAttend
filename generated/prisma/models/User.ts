@@ -33,6 +33,7 @@ export type UserMinAggregateOutputType = {
   role: $Enums.Role | null
   groupRole: $Enums.GroupRole | null
   studentId: string | null
+  hasCompletedOnboading: boolean | null
   academicGroupId: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -47,6 +48,7 @@ export type UserMaxAggregateOutputType = {
   role: $Enums.Role | null
   groupRole: $Enums.GroupRole | null
   studentId: string | null
+  hasCompletedOnboading: boolean | null
   academicGroupId: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -61,6 +63,8 @@ export type UserCountAggregateOutputType = {
   role: number
   groupRole: number
   studentId: number
+  onboadingAnswers: number
+  hasCompletedOnboading: number
   academicGroupId: number
   createdAt: number
   updatedAt: number
@@ -77,6 +81,7 @@ export type UserMinAggregateInputType = {
   role?: true
   groupRole?: true
   studentId?: true
+  hasCompletedOnboading?: true
   academicGroupId?: true
   createdAt?: true
   updatedAt?: true
@@ -91,6 +96,7 @@ export type UserMaxAggregateInputType = {
   role?: true
   groupRole?: true
   studentId?: true
+  hasCompletedOnboading?: true
   academicGroupId?: true
   createdAt?: true
   updatedAt?: true
@@ -105,6 +111,8 @@ export type UserCountAggregateInputType = {
   role?: true
   groupRole?: true
   studentId?: true
+  onboadingAnswers?: true
+  hasCompletedOnboading?: true
   academicGroupId?: true
   createdAt?: true
   updatedAt?: true
@@ -192,6 +200,8 @@ export type UserGroupByOutputType = {
   role: $Enums.Role
   groupRole: $Enums.GroupRole | null
   studentId: string | null
+  onboadingAnswers: runtime.JsonValue | null
+  hasCompletedOnboading: boolean
   academicGroupId: string | null
   createdAt: Date
   updatedAt: Date
@@ -227,6 +237,8 @@ export type UserWhereInput = {
   role?: Prisma.EnumRoleFilter<"User"> | $Enums.Role
   groupRole?: Prisma.EnumGroupRoleNullableFilter<"User"> | $Enums.GroupRole | null
   studentId?: Prisma.StringNullableFilter<"User"> | string | null
+  onboadingAnswers?: Prisma.JsonNullableFilter<"User">
+  hasCompletedOnboading?: Prisma.BoolFilter<"User"> | boolean
   academicGroupId?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
@@ -246,6 +258,8 @@ export type UserOrderByWithRelationInput = {
   role?: Prisma.SortOrder
   groupRole?: Prisma.SortOrderInput | Prisma.SortOrder
   studentId?: Prisma.SortOrderInput | Prisma.SortOrder
+  onboadingAnswers?: Prisma.SortOrderInput | Prisma.SortOrder
+  hasCompletedOnboading?: Prisma.SortOrder
   academicGroupId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -268,6 +282,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   password?: Prisma.StringFilter<"User"> | string
   role?: Prisma.EnumRoleFilter<"User"> | $Enums.Role
   groupRole?: Prisma.EnumGroupRoleNullableFilter<"User"> | $Enums.GroupRole | null
+  onboadingAnswers?: Prisma.JsonNullableFilter<"User">
+  hasCompletedOnboading?: Prisma.BoolFilter<"User"> | boolean
   academicGroupId?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
@@ -287,6 +303,8 @@ export type UserOrderByWithAggregationInput = {
   role?: Prisma.SortOrder
   groupRole?: Prisma.SortOrderInput | Prisma.SortOrder
   studentId?: Prisma.SortOrderInput | Prisma.SortOrder
+  onboadingAnswers?: Prisma.SortOrderInput | Prisma.SortOrder
+  hasCompletedOnboading?: Prisma.SortOrder
   academicGroupId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -307,6 +325,8 @@ export type UserScalarWhereWithAggregatesInput = {
   role?: Prisma.EnumRoleWithAggregatesFilter<"User"> | $Enums.Role
   groupRole?: Prisma.EnumGroupRoleNullableWithAggregatesFilter<"User"> | $Enums.GroupRole | null
   studentId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  onboadingAnswers?: Prisma.JsonNullableWithAggregatesFilter<"User">
+  hasCompletedOnboading?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   academicGroupId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
@@ -321,6 +341,8 @@ export type UserCreateInput = {
   role: $Enums.Role
   groupRole?: $Enums.GroupRole | null
   studentId?: string | null
+  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboading?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   academicGroup?: Prisma.AcademicGroupCreateNestedOneWithoutStudentsInput
@@ -339,6 +361,8 @@ export type UserUncheckedCreateInput = {
   role: $Enums.Role
   groupRole?: $Enums.GroupRole | null
   studentId?: string | null
+  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboading?: boolean
   academicGroupId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -357,6 +381,8 @@ export type UserUpdateInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   groupRole?: Prisma.NullableEnumGroupRoleFieldUpdateOperationsInput | $Enums.GroupRole | null
   studentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboading?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   academicGroup?: Prisma.AcademicGroupUpdateOneWithoutStudentsNestedInput
@@ -375,6 +401,8 @@ export type UserUncheckedUpdateInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   groupRole?: Prisma.NullableEnumGroupRoleFieldUpdateOperationsInput | $Enums.GroupRole | null
   studentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboading?: Prisma.BoolFieldUpdateOperationsInput | boolean
   academicGroupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -393,6 +421,8 @@ export type UserCreateManyInput = {
   role: $Enums.Role
   groupRole?: $Enums.GroupRole | null
   studentId?: string | null
+  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboading?: boolean
   academicGroupId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -407,6 +437,8 @@ export type UserUpdateManyMutationInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   groupRole?: Prisma.NullableEnumGroupRoleFieldUpdateOperationsInput | $Enums.GroupRole | null
   studentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboading?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -420,6 +452,8 @@ export type UserUncheckedUpdateManyInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   groupRole?: Prisma.NullableEnumGroupRoleFieldUpdateOperationsInput | $Enums.GroupRole | null
   studentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboading?: Prisma.BoolFieldUpdateOperationsInput | boolean
   academicGroupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -444,6 +478,8 @@ export type UserCountOrderByAggregateInput = {
   role?: Prisma.SortOrder
   groupRole?: Prisma.SortOrder
   studentId?: Prisma.SortOrder
+  onboadingAnswers?: Prisma.SortOrder
+  hasCompletedOnboading?: Prisma.SortOrder
   academicGroupId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -458,6 +494,7 @@ export type UserMaxOrderByAggregateInput = {
   role?: Prisma.SortOrder
   groupRole?: Prisma.SortOrder
   studentId?: Prisma.SortOrder
+  hasCompletedOnboading?: Prisma.SortOrder
   academicGroupId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -472,6 +509,7 @@ export type UserMinOrderByAggregateInput = {
   role?: Prisma.SortOrder
   groupRole?: Prisma.SortOrder
   studentId?: Prisma.SortOrder
+  hasCompletedOnboading?: Prisma.SortOrder
   academicGroupId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -530,6 +568,10 @@ export type EnumRoleFieldUpdateOperationsInput = {
 
 export type NullableEnumGroupRoleFieldUpdateOperationsInput = {
   set?: $Enums.GroupRole | null
+}
+
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
 }
 
 export type UserCreateNestedOneWithoutCourseOfferingsInput = {
@@ -597,6 +639,8 @@ export type UserCreateWithoutAcademicGroupInput = {
   role: $Enums.Role
   groupRole?: $Enums.GroupRole | null
   studentId?: string | null
+  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboading?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   courseOfferings?: Prisma.CourseOfferingCreateNestedManyWithoutLecturerInput
@@ -614,6 +658,8 @@ export type UserUncheckedCreateWithoutAcademicGroupInput = {
   role: $Enums.Role
   groupRole?: $Enums.GroupRole | null
   studentId?: string | null
+  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboading?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   courseOfferings?: Prisma.CourseOfferingUncheckedCreateNestedManyWithoutLecturerInput
@@ -660,6 +706,8 @@ export type UserScalarWhereInput = {
   role?: Prisma.EnumRoleFilter<"User"> | $Enums.Role
   groupRole?: Prisma.EnumGroupRoleNullableFilter<"User"> | $Enums.GroupRole | null
   studentId?: Prisma.StringNullableFilter<"User"> | string | null
+  onboadingAnswers?: Prisma.JsonNullableFilter<"User">
+  hasCompletedOnboading?: Prisma.BoolFilter<"User"> | boolean
   academicGroupId?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
@@ -674,6 +722,8 @@ export type UserCreateWithoutCourseOfferingsInput = {
   role: $Enums.Role
   groupRole?: $Enums.GroupRole | null
   studentId?: string | null
+  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboading?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   academicGroup?: Prisma.AcademicGroupCreateNestedOneWithoutStudentsInput
@@ -691,6 +741,8 @@ export type UserUncheckedCreateWithoutCourseOfferingsInput = {
   role: $Enums.Role
   groupRole?: $Enums.GroupRole | null
   studentId?: string | null
+  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboading?: boolean
   academicGroupId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -724,6 +776,8 @@ export type UserUpdateWithoutCourseOfferingsInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   groupRole?: Prisma.NullableEnumGroupRoleFieldUpdateOperationsInput | $Enums.GroupRole | null
   studentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboading?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   academicGroup?: Prisma.AcademicGroupUpdateOneWithoutStudentsNestedInput
@@ -741,6 +795,8 @@ export type UserUncheckedUpdateWithoutCourseOfferingsInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   groupRole?: Prisma.NullableEnumGroupRoleFieldUpdateOperationsInput | $Enums.GroupRole | null
   studentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboading?: Prisma.BoolFieldUpdateOperationsInput | boolean
   academicGroupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -758,6 +814,8 @@ export type UserCreateWithoutEnrollmentsInput = {
   role: $Enums.Role
   groupRole?: $Enums.GroupRole | null
   studentId?: string | null
+  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboading?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   academicGroup?: Prisma.AcademicGroupCreateNestedOneWithoutStudentsInput
@@ -775,6 +833,8 @@ export type UserUncheckedCreateWithoutEnrollmentsInput = {
   role: $Enums.Role
   groupRole?: $Enums.GroupRole | null
   studentId?: string | null
+  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboading?: boolean
   academicGroupId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -808,6 +868,8 @@ export type UserUpdateWithoutEnrollmentsInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   groupRole?: Prisma.NullableEnumGroupRoleFieldUpdateOperationsInput | $Enums.GroupRole | null
   studentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboading?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   academicGroup?: Prisma.AcademicGroupUpdateOneWithoutStudentsNestedInput
@@ -825,6 +887,8 @@ export type UserUncheckedUpdateWithoutEnrollmentsInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   groupRole?: Prisma.NullableEnumGroupRoleFieldUpdateOperationsInput | $Enums.GroupRole | null
   studentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboading?: Prisma.BoolFieldUpdateOperationsInput | boolean
   academicGroupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -842,6 +906,8 @@ export type UserCreateWithoutAttendanceSessionsInput = {
   role: $Enums.Role
   groupRole?: $Enums.GroupRole | null
   studentId?: string | null
+  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboading?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   academicGroup?: Prisma.AcademicGroupCreateNestedOneWithoutStudentsInput
@@ -859,6 +925,8 @@ export type UserUncheckedCreateWithoutAttendanceSessionsInput = {
   role: $Enums.Role
   groupRole?: $Enums.GroupRole | null
   studentId?: string | null
+  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboading?: boolean
   academicGroupId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -892,6 +960,8 @@ export type UserUpdateWithoutAttendanceSessionsInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   groupRole?: Prisma.NullableEnumGroupRoleFieldUpdateOperationsInput | $Enums.GroupRole | null
   studentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboading?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   academicGroup?: Prisma.AcademicGroupUpdateOneWithoutStudentsNestedInput
@@ -909,6 +979,8 @@ export type UserUncheckedUpdateWithoutAttendanceSessionsInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   groupRole?: Prisma.NullableEnumGroupRoleFieldUpdateOperationsInput | $Enums.GroupRole | null
   studentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboading?: Prisma.BoolFieldUpdateOperationsInput | boolean
   academicGroupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -926,6 +998,8 @@ export type UserCreateWithoutAttendanceRecordsInput = {
   role: $Enums.Role
   groupRole?: $Enums.GroupRole | null
   studentId?: string | null
+  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboading?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   academicGroup?: Prisma.AcademicGroupCreateNestedOneWithoutStudentsInput
@@ -943,6 +1017,8 @@ export type UserUncheckedCreateWithoutAttendanceRecordsInput = {
   role: $Enums.Role
   groupRole?: $Enums.GroupRole | null
   studentId?: string | null
+  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboading?: boolean
   academicGroupId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -976,6 +1052,8 @@ export type UserUpdateWithoutAttendanceRecordsInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   groupRole?: Prisma.NullableEnumGroupRoleFieldUpdateOperationsInput | $Enums.GroupRole | null
   studentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboading?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   academicGroup?: Prisma.AcademicGroupUpdateOneWithoutStudentsNestedInput
@@ -993,6 +1071,8 @@ export type UserUncheckedUpdateWithoutAttendanceRecordsInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   groupRole?: Prisma.NullableEnumGroupRoleFieldUpdateOperationsInput | $Enums.GroupRole | null
   studentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboading?: Prisma.BoolFieldUpdateOperationsInput | boolean
   academicGroupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1010,6 +1090,8 @@ export type UserCreateManyAcademicGroupInput = {
   role: $Enums.Role
   groupRole?: $Enums.GroupRole | null
   studentId?: string | null
+  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboading?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1023,6 +1105,8 @@ export type UserUpdateWithoutAcademicGroupInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   groupRole?: Prisma.NullableEnumGroupRoleFieldUpdateOperationsInput | $Enums.GroupRole | null
   studentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboading?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   courseOfferings?: Prisma.CourseOfferingUpdateManyWithoutLecturerNestedInput
@@ -1040,6 +1124,8 @@ export type UserUncheckedUpdateWithoutAcademicGroupInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   groupRole?: Prisma.NullableEnumGroupRoleFieldUpdateOperationsInput | $Enums.GroupRole | null
   studentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboading?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   courseOfferings?: Prisma.CourseOfferingUncheckedUpdateManyWithoutLecturerNestedInput
@@ -1057,6 +1143,8 @@ export type UserUncheckedUpdateManyWithoutAcademicGroupInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   groupRole?: Prisma.NullableEnumGroupRoleFieldUpdateOperationsInput | $Enums.GroupRole | null
   studentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboading?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1128,6 +1216,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   role?: boolean
   groupRole?: boolean
   studentId?: boolean
+  onboadingAnswers?: boolean
+  hasCompletedOnboading?: boolean
   academicGroupId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1148,6 +1238,8 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   role?: boolean
   groupRole?: boolean
   studentId?: boolean
+  onboadingAnswers?: boolean
+  hasCompletedOnboading?: boolean
   academicGroupId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1163,6 +1255,8 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   role?: boolean
   groupRole?: boolean
   studentId?: boolean
+  onboadingAnswers?: boolean
+  hasCompletedOnboading?: boolean
   academicGroupId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1178,12 +1272,14 @@ export type UserSelectScalar = {
   role?: boolean
   groupRole?: boolean
   studentId?: boolean
+  onboadingAnswers?: boolean
+  hasCompletedOnboading?: boolean
   academicGroupId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstName" | "lastName" | "email" | "password" | "role" | "groupRole" | "studentId" | "academicGroupId" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstName" | "lastName" | "email" | "password" | "role" | "groupRole" | "studentId" | "onboadingAnswers" | "hasCompletedOnboading" | "academicGroupId" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   academicGroup?: boolean | Prisma.User$academicGroupArgs<ExtArgs>
   courseOfferings?: boolean | Prisma.User$courseOfferingsArgs<ExtArgs>
@@ -1217,6 +1313,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     role: $Enums.Role
     groupRole: $Enums.GroupRole | null
     studentId: string | null
+    onboadingAnswers: runtime.JsonValue | null
+    hasCompletedOnboading: boolean
     academicGroupId: string | null
     createdAt: Date
     updatedAt: Date
@@ -1656,6 +1754,8 @@ export interface UserFieldRefs {
   readonly role: Prisma.FieldRef<"User", 'Role'>
   readonly groupRole: Prisma.FieldRef<"User", 'GroupRole'>
   readonly studentId: Prisma.FieldRef<"User", 'String'>
+  readonly onboadingAnswers: Prisma.FieldRef<"User", 'Json'>
+  readonly hasCompletedOnboading: Prisma.FieldRef<"User", 'Boolean'>
   readonly academicGroupId: Prisma.FieldRef<"User", 'String'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>

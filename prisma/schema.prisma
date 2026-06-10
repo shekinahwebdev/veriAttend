@@ -87,6 +87,9 @@ model User {
 
   studentId String? @unique
 
+  onboadingAnswers Json?
+  hasCompletedOnboading Boolean @default(false)
+
   academicGroupId String?
   academicGroup   AcademicGroup? @relation(fields: [academicGroupId], references: [id])
 
