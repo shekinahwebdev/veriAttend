@@ -320,7 +320,7 @@ export type CourseOfferingCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   course: Prisma.CourseCreateNestedOneWithoutOfferingsInput
-  lecturer: Prisma.UserCreateNestedOneWithoutCourseOfferingsInput
+  lecturer: Prisma.UserCreateNestedOneWithoutTaughtOfferingsInput
   academicGroup: Prisma.AcademicGroupCreateNestedOneWithoutOfferingsInput
   enrollments?: Prisma.EnrollmentCreateNestedManyWithoutCourseOfferingInput
   sessions?: Prisma.AttendanceSessionCreateNestedManyWithoutCourseOfferingInput
@@ -346,7 +346,7 @@ export type CourseOfferingUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   course?: Prisma.CourseUpdateOneRequiredWithoutOfferingsNestedInput
-  lecturer?: Prisma.UserUpdateOneRequiredWithoutCourseOfferingsNestedInput
+  lecturer?: Prisma.UserUpdateOneRequiredWithoutTaughtOfferingsNestedInput
   academicGroup?: Prisma.AcademicGroupUpdateOneRequiredWithoutOfferingsNestedInput
   enrollments?: Prisma.EnrollmentUpdateManyWithoutCourseOfferingNestedInput
   sessions?: Prisma.AttendanceSessionUpdateManyWithoutCourseOfferingNestedInput
@@ -619,7 +619,7 @@ export type CourseOfferingCreateWithoutAcademicGroupInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   course: Prisma.CourseCreateNestedOneWithoutOfferingsInput
-  lecturer: Prisma.UserCreateNestedOneWithoutCourseOfferingsInput
+  lecturer: Prisma.UserCreateNestedOneWithoutTaughtOfferingsInput
   enrollments?: Prisma.EnrollmentCreateNestedManyWithoutCourseOfferingInput
   sessions?: Prisma.AttendanceSessionCreateNestedManyWithoutCourseOfferingInput
 }
@@ -732,7 +732,7 @@ export type CourseOfferingCreateWithoutCourseInput = {
   academicYear: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  lecturer: Prisma.UserCreateNestedOneWithoutCourseOfferingsInput
+  lecturer: Prisma.UserCreateNestedOneWithoutTaughtOfferingsInput
   academicGroup: Prisma.AcademicGroupCreateNestedOneWithoutOfferingsInput
   enrollments?: Prisma.EnrollmentCreateNestedManyWithoutCourseOfferingInput
   sessions?: Prisma.AttendanceSessionCreateNestedManyWithoutCourseOfferingInput
@@ -783,7 +783,7 @@ export type CourseOfferingCreateWithoutEnrollmentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   course: Prisma.CourseCreateNestedOneWithoutOfferingsInput
-  lecturer: Prisma.UserCreateNestedOneWithoutCourseOfferingsInput
+  lecturer: Prisma.UserCreateNestedOneWithoutTaughtOfferingsInput
   academicGroup: Prisma.AcademicGroupCreateNestedOneWithoutOfferingsInput
   sessions?: Prisma.AttendanceSessionCreateNestedManyWithoutCourseOfferingInput
 }
@@ -823,7 +823,7 @@ export type CourseOfferingUpdateWithoutEnrollmentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   course?: Prisma.CourseUpdateOneRequiredWithoutOfferingsNestedInput
-  lecturer?: Prisma.UserUpdateOneRequiredWithoutCourseOfferingsNestedInput
+  lecturer?: Prisma.UserUpdateOneRequiredWithoutTaughtOfferingsNestedInput
   academicGroup?: Prisma.AcademicGroupUpdateOneRequiredWithoutOfferingsNestedInput
   sessions?: Prisma.AttendanceSessionUpdateManyWithoutCourseOfferingNestedInput
 }
@@ -847,7 +847,7 @@ export type CourseOfferingCreateWithoutSessionsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   course: Prisma.CourseCreateNestedOneWithoutOfferingsInput
-  lecturer: Prisma.UserCreateNestedOneWithoutCourseOfferingsInput
+  lecturer: Prisma.UserCreateNestedOneWithoutTaughtOfferingsInput
   academicGroup: Prisma.AcademicGroupCreateNestedOneWithoutOfferingsInput
   enrollments?: Prisma.EnrollmentCreateNestedManyWithoutCourseOfferingInput
 }
@@ -887,7 +887,7 @@ export type CourseOfferingUpdateWithoutSessionsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   course?: Prisma.CourseUpdateOneRequiredWithoutOfferingsNestedInput
-  lecturer?: Prisma.UserUpdateOneRequiredWithoutCourseOfferingsNestedInput
+  lecturer?: Prisma.UserUpdateOneRequiredWithoutTaughtOfferingsNestedInput
   academicGroup?: Prisma.AcademicGroupUpdateOneRequiredWithoutOfferingsNestedInput
   enrollments?: Prisma.EnrollmentUpdateManyWithoutCourseOfferingNestedInput
 }
@@ -921,7 +921,7 @@ export type CourseOfferingUpdateWithoutAcademicGroupInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   course?: Prisma.CourseUpdateOneRequiredWithoutOfferingsNestedInput
-  lecturer?: Prisma.UserUpdateOneRequiredWithoutCourseOfferingsNestedInput
+  lecturer?: Prisma.UserUpdateOneRequiredWithoutTaughtOfferingsNestedInput
   enrollments?: Prisma.EnrollmentUpdateManyWithoutCourseOfferingNestedInput
   sessions?: Prisma.AttendanceSessionUpdateManyWithoutCourseOfferingNestedInput
 }
@@ -1008,7 +1008,7 @@ export type CourseOfferingUpdateWithoutCourseInput = {
   academicYear?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lecturer?: Prisma.UserUpdateOneRequiredWithoutCourseOfferingsNestedInput
+  lecturer?: Prisma.UserUpdateOneRequiredWithoutTaughtOfferingsNestedInput
   academicGroup?: Prisma.AcademicGroupUpdateOneRequiredWithoutOfferingsNestedInput
   enrollments?: Prisma.EnrollmentUpdateManyWithoutCourseOfferingNestedInput
   sessions?: Prisma.AttendanceSessionUpdateManyWithoutCourseOfferingNestedInput
