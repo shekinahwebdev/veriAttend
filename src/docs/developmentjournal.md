@@ -45,6 +45,8 @@
 ### Challenges Faced:
 
 - How to implement syn changes from user select role and group to authentication pagee(signup page) to ensure that the user's selections are accurately reflected in the authentication process and that they can access the appropriate features based on their roles and groups.
+- How to re-structure the authentication process to accommodate different user roles and groups while maintaining a secure and user-friendly experience for all users.
+- -How to restructure the database schema to effectively manage and store user data, including their roles, groups, and captured answers from the onboarding process, while ensuring data integrity and security within the system.
 
 ### Lessons Learned:
 
