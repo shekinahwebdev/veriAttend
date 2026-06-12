@@ -13,15 +13,16 @@ datasource db {
 }
 
 model Institution {
-  id          String  @id @default(uuid())
+  id String @id @default(uuid())
+
   name        String  @unique
   shortName   String? @unique
   phoneNumber String?
 
+  departments Department[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  departments Department[]
 }
 
 model Department {
@@ -33,13 +34,13 @@ model Department {
   institutionId String
   institution   Institution @relation(fields: [institutionId], references: [id])
 
-  groups AcademicGroup[]
+  groups  AcademicGroup[]
+  courses Course[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  // This line creates the composite unique constraint
-  @@unique([institutionId, id])
+  @@unique([institutionId, code])
 }
 
 model AcademicGroup {
@@ -57,7 +58,7 @@ model AcademicGroup {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@unique([departmentId, id])
+  @@unique([departmentId, level, name])
 }
 
 enum Role {
@@ -87,18 +88,24 @@ model User {
 
   studentId String? @unique
 
-  onboadingAnswers Json?
-  hasCompletedOnboading Boolean @default(false)
+  onboardingAnswers      Json?
+  hasCompletedOnboarding Boolean @default(false)
+
+  mustChangePassword Boolean @default(false)
 
   academicGroupId String?
   academicGroup   AcademicGroup? @relation(fields: [academicGroupId], references: [id])
 
-  createdAt          DateTime            @default(now())
-  updatedAt          DateTime            @updatedAt
-  courseOfferings    CourseOffering[]
-  enrollments        Enrollment[]
-  attendanceSessions AttendanceSession[]
-  attendanceRecords  AttendanceRecord[]
+  enrollments Enrollment[] @relation("StudentEnrollments")
+
+  taughtOfferings CourseOffering[] @relation("LecturerOfferings")
+
+  startedSessions AttendanceSession[] @relation("SessionStarter")
+
+  attendanceRecords AttendanceRecord[] @relation("StudentAttendanceRecords")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Course {
@@ -108,6 +115,9 @@ model Course {
   courseName String
 
   creditHours Int?
+
+  departmentId String
+  department   Department @relation(fields: [departmentId], references: [id])
 
   offerings CourseOffering[]
 
@@ -122,16 +132,18 @@ model CourseOffering {
   course   Course @relation(fields: [courseId], references: [id])
 
   lecturerId String
-  lecturer   User   @relation(fields: [lecturerId], references: [id])
+  lecturer   User @relation("LecturerOfferings", fields: [lecturerId], references: [id])
 
   academicGroupId String
   academicGroup   AcademicGroup @relation(fields: [academicGroupId], references: [id])
 
-  semester     Int
+  semester Int
+
   academicYear String
 
   enrollments Enrollment[]
-  sessions    AttendanceSession[]
+
+  sessions AttendanceSession[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -143,7 +155,7 @@ model Enrollment {
   id String @id @default(uuid())
 
   studentId String
-  student   User   @relation(fields: [studentId], references: [id])
+  student   User @relation("StudentEnrollments", fields: [studentId], references: [id])
 
   courseOfferingId String
   courseOffering   CourseOffering @relation(fields: [courseOfferingId], references: [id])
@@ -165,11 +177,11 @@ model AttendanceSession {
   courseOffering   CourseOffering @relation(fields: [courseOfferingId], references: [id])
 
   startedById String
-  startedBy   User   @relation(fields: [startedById], references: [id])
+  startedBy   User @relation("SessionStarter", fields: [startedById], references: [id])
 
   attendanceCode String @unique
 
-  latitude  Float?
+  latitude Float?
   longitude Float?
 
   radius Int?
@@ -197,7 +209,7 @@ model AttendanceRecord {
   attendanceSession   AttendanceSession @relation(fields: [attendanceSessionId], references: [id])
 
   studentId String
-  student   User   @relation(fields: [studentId], references: [id])
+  student   User @relation("StudentAttendanceRecords", fields: [studentId], references: [id])
 
   status AttendanceStatus
 

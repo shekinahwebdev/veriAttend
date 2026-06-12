@@ -123,8 +123,9 @@ export const UserScalarFieldEnum = {
   role: 'role',
   groupRole: 'groupRole',
   studentId: 'studentId',
-  onboadingAnswers: 'onboadingAnswers',
-  hasCompletedOnboading: 'hasCompletedOnboading',
+  onboardingAnswers: 'onboardingAnswers',
+  hasCompletedOnboarding: 'hasCompletedOnboarding',
+  mustChangePassword: 'mustChangePassword',
   academicGroupId: 'academicGroupId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -138,6 +139,7 @@ export const CourseScalarFieldEnum = {
   courseCode: 'courseCode',
   courseName: 'courseName',
   creditHours: 'creditHours',
+  departmentId: 'departmentId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

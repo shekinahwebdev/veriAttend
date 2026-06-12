@@ -95,27 +95,34 @@ export default function OnboardingContainer() {
 
   // Handles user navigation between login and signUp page
   const handleContinue = (action: any) => {
-    if (action === "login") {
-      router.push("/login");
-      return;
-    }
-
     // handles user step states
     if (step === "role") {
       if (selectedRole === "student") {
         setStep("studentGroup");
       } else {
-        router.push(`/auth/signup?role=${selectedRole}`);
+        router.push(`/auth/login?role=${selectedRole}`);
       }
     } else if (step === "studentGroup") {
       if (
-        selectedGroupRole === "MEMBER" ||
-        selectedGroupRole === "MAIN_REP" ||
-        selectedGroupRole === "ASSISTANT_REP"
+        action === "signup" &&
+        (selectedGroupRole === "MEMBER" ||
+          selectedGroupRole === "MAIN_REP" ||
+          selectedGroupRole === "ASSISTANT_REP")
       ) {
         router.push(
           `/auth/signup?role=${selectedRole}&groupRole=${selectedGroupRole}`,
         );
+        return;
+      } else if (
+        action === "login" &&
+        (selectedGroupRole === "MEMBER" ||
+          selectedGroupRole === "MAIN_REP" ||
+          selectedGroupRole === "ASSISTANT_REP")
+      ) {
+        router.push(
+          `/auth/login?role=${selectedRole}&groupRole=${selectedGroupRole}`,
+        );
+        return;
       } else {
         router.push("/dashboard");
       }
@@ -218,22 +225,22 @@ export default function OnboardingContainer() {
 
       <div className="mt-5 lg:mt-10 flex items-center justify-between border-t border-border/60 dark:border-slate-800/60 pt-6 gap-4">
         {step === "studentGroup" ? (
-          <button
-            type="button"
-            // onClick={() => setStep("role")}
-            onClick={handleGoBack}
-            className="px-4 py-2.5 border border-border/80 text-muted-foreground hover:text-foreground rounded-xl text-sm font-medium hover:bg-accent transition-all flex items-center gap-2 cursor-pointer"
-          >
-            <ArrowLeft size={14} />
-            Go Back
-          </button>
-        ) : (
-          (selectedRole === "lecturer" || selectedRole === "administrator") && (
+          <div className="flex items-center gap-3">
             <button
               type="button"
-              disabled={step === "role" ? !selectedRole : !selectedGroupRole}
-              onClick={() => handleContinue("login")}
+              onClick={handleGoBack}
               className="px-4 py-2.5 border border-border/80 text-muted-foreground hover:text-foreground rounded-xl text-sm font-medium hover:bg-accent transition-all flex items-center gap-2 cursor-pointer"
+            >
+              <ArrowLeft size={14} />
+              Go Back
+            </button>
+            <button
+              type="button"
+              disabled={
+                step === "studentGroup" ? !selectedGroupRole : !selectedRole
+              }
+              onClick={() => handleContinue("login")}
+              className="px-4 py-2.5 border border-border/80 bg-primary disabled:opacity-50 disabled:pointer-events-none hover:bg-primary/95 text-primary-foreground rounded-xl text-sm font-medium transition-all flex items-center gap-2 cursor-pointer"
             >
               Login
               <ArrowRight
@@ -241,17 +248,35 @@ export default function OnboardingContainer() {
                 className="group-hover:translate-x-0.5 transition-transform"
               />
             </button>
-          )
+          </div>
+        ) : (
+          // (
+          //   (selectedRole === "lecturer" || selectedRole === "administrator") && (
+          //     <button
+          //       type="button"
+          //       disabled={step === "role" ? !selectedRole : !selectedGroupRole}
+          //       onClick={() => handleContinue("login")}
+          //       className="px-4 py-2.5 border border-border/80 text-muted-foreground hover:text-foreground rounded-xl text-sm font-medium hover:bg-accent transition-all flex items-center gap-2 cursor-pointer"
+          //     >
+          //       Login
+          //       <ArrowRight
+          //         size={15}
+          //         className="group-hover:translate-x-0.5 transition-transform"
+          //       />
+          //     </button>
+          //   )
+          // )
+          ""
         )}
 
         <button
           type="button"
           disabled={step === "role" ? !selectedRole : !selectedGroupRole}
-          onClick={handleContinue}
+          onClick={() => handleContinue("signup")}
           className="w-full sm:w-auto px-6 py-2.5 bg-primary disabled:opacity-50 disabled:pointer-events-none hover:bg-primary/95 text-primary-foreground font-medium text-sm rounded-xl shadow-xs transition-all flex items-center justify-center gap-2 group cursor-pointer"
         >
           {step === "role" && selectedRole !== "student"
-            ? "Continue Registration"
+            ? "Login"
             : step === "studentGroup"
               ? "Create Account"
               : "Next Step"}

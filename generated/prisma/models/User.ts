@@ -33,7 +33,8 @@ export type UserMinAggregateOutputType = {
   role: $Enums.Role | null
   groupRole: $Enums.GroupRole | null
   studentId: string | null
-  hasCompletedOnboading: boolean | null
+  hasCompletedOnboarding: boolean | null
+  mustChangePassword: boolean | null
   academicGroupId: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -48,7 +49,8 @@ export type UserMaxAggregateOutputType = {
   role: $Enums.Role | null
   groupRole: $Enums.GroupRole | null
   studentId: string | null
-  hasCompletedOnboading: boolean | null
+  hasCompletedOnboarding: boolean | null
+  mustChangePassword: boolean | null
   academicGroupId: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -63,8 +65,9 @@ export type UserCountAggregateOutputType = {
   role: number
   groupRole: number
   studentId: number
-  onboadingAnswers: number
-  hasCompletedOnboading: number
+  onboardingAnswers: number
+  hasCompletedOnboarding: number
+  mustChangePassword: number
   academicGroupId: number
   createdAt: number
   updatedAt: number
@@ -81,7 +84,8 @@ export type UserMinAggregateInputType = {
   role?: true
   groupRole?: true
   studentId?: true
-  hasCompletedOnboading?: true
+  hasCompletedOnboarding?: true
+  mustChangePassword?: true
   academicGroupId?: true
   createdAt?: true
   updatedAt?: true
@@ -96,7 +100,8 @@ export type UserMaxAggregateInputType = {
   role?: true
   groupRole?: true
   studentId?: true
-  hasCompletedOnboading?: true
+  hasCompletedOnboarding?: true
+  mustChangePassword?: true
   academicGroupId?: true
   createdAt?: true
   updatedAt?: true
@@ -111,8 +116,9 @@ export type UserCountAggregateInputType = {
   role?: true
   groupRole?: true
   studentId?: true
-  onboadingAnswers?: true
-  hasCompletedOnboading?: true
+  onboardingAnswers?: true
+  hasCompletedOnboarding?: true
+  mustChangePassword?: true
   academicGroupId?: true
   createdAt?: true
   updatedAt?: true
@@ -200,8 +206,9 @@ export type UserGroupByOutputType = {
   role: $Enums.Role
   groupRole: $Enums.GroupRole | null
   studentId: string | null
-  onboadingAnswers: runtime.JsonValue | null
-  hasCompletedOnboading: boolean
+  onboardingAnswers: runtime.JsonValue | null
+  hasCompletedOnboarding: boolean
+  mustChangePassword: boolean
   academicGroupId: string | null
   createdAt: Date
   updatedAt: Date
@@ -237,15 +244,16 @@ export type UserWhereInput = {
   role?: Prisma.EnumRoleFilter<"User"> | $Enums.Role
   groupRole?: Prisma.EnumGroupRoleNullableFilter<"User"> | $Enums.GroupRole | null
   studentId?: Prisma.StringNullableFilter<"User"> | string | null
-  onboadingAnswers?: Prisma.JsonNullableFilter<"User">
-  hasCompletedOnboading?: Prisma.BoolFilter<"User"> | boolean
+  onboardingAnswers?: Prisma.JsonNullableFilter<"User">
+  hasCompletedOnboarding?: Prisma.BoolFilter<"User"> | boolean
+  mustChangePassword?: Prisma.BoolFilter<"User"> | boolean
   academicGroupId?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   academicGroup?: Prisma.XOR<Prisma.AcademicGroupNullableScalarRelationFilter, Prisma.AcademicGroupWhereInput> | null
-  courseOfferings?: Prisma.CourseOfferingListRelationFilter
   enrollments?: Prisma.EnrollmentListRelationFilter
-  attendanceSessions?: Prisma.AttendanceSessionListRelationFilter
+  taughtOfferings?: Prisma.CourseOfferingListRelationFilter
+  startedSessions?: Prisma.AttendanceSessionListRelationFilter
   attendanceRecords?: Prisma.AttendanceRecordListRelationFilter
 }
 
@@ -258,15 +266,16 @@ export type UserOrderByWithRelationInput = {
   role?: Prisma.SortOrder
   groupRole?: Prisma.SortOrderInput | Prisma.SortOrder
   studentId?: Prisma.SortOrderInput | Prisma.SortOrder
-  onboadingAnswers?: Prisma.SortOrderInput | Prisma.SortOrder
-  hasCompletedOnboading?: Prisma.SortOrder
+  onboardingAnswers?: Prisma.SortOrderInput | Prisma.SortOrder
+  hasCompletedOnboarding?: Prisma.SortOrder
+  mustChangePassword?: Prisma.SortOrder
   academicGroupId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   academicGroup?: Prisma.AcademicGroupOrderByWithRelationInput
-  courseOfferings?: Prisma.CourseOfferingOrderByRelationAggregateInput
   enrollments?: Prisma.EnrollmentOrderByRelationAggregateInput
-  attendanceSessions?: Prisma.AttendanceSessionOrderByRelationAggregateInput
+  taughtOfferings?: Prisma.CourseOfferingOrderByRelationAggregateInput
+  startedSessions?: Prisma.AttendanceSessionOrderByRelationAggregateInput
   attendanceRecords?: Prisma.AttendanceRecordOrderByRelationAggregateInput
 }
 
@@ -282,15 +291,16 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   password?: Prisma.StringFilter<"User"> | string
   role?: Prisma.EnumRoleFilter<"User"> | $Enums.Role
   groupRole?: Prisma.EnumGroupRoleNullableFilter<"User"> | $Enums.GroupRole | null
-  onboadingAnswers?: Prisma.JsonNullableFilter<"User">
-  hasCompletedOnboading?: Prisma.BoolFilter<"User"> | boolean
+  onboardingAnswers?: Prisma.JsonNullableFilter<"User">
+  hasCompletedOnboarding?: Prisma.BoolFilter<"User"> | boolean
+  mustChangePassword?: Prisma.BoolFilter<"User"> | boolean
   academicGroupId?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   academicGroup?: Prisma.XOR<Prisma.AcademicGroupNullableScalarRelationFilter, Prisma.AcademicGroupWhereInput> | null
-  courseOfferings?: Prisma.CourseOfferingListRelationFilter
   enrollments?: Prisma.EnrollmentListRelationFilter
-  attendanceSessions?: Prisma.AttendanceSessionListRelationFilter
+  taughtOfferings?: Prisma.CourseOfferingListRelationFilter
+  startedSessions?: Prisma.AttendanceSessionListRelationFilter
   attendanceRecords?: Prisma.AttendanceRecordListRelationFilter
 }, "id" | "email" | "studentId">
 
@@ -303,8 +313,9 @@ export type UserOrderByWithAggregationInput = {
   role?: Prisma.SortOrder
   groupRole?: Prisma.SortOrderInput | Prisma.SortOrder
   studentId?: Prisma.SortOrderInput | Prisma.SortOrder
-  onboadingAnswers?: Prisma.SortOrderInput | Prisma.SortOrder
-  hasCompletedOnboading?: Prisma.SortOrder
+  onboardingAnswers?: Prisma.SortOrderInput | Prisma.SortOrder
+  hasCompletedOnboarding?: Prisma.SortOrder
+  mustChangePassword?: Prisma.SortOrder
   academicGroupId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -325,8 +336,9 @@ export type UserScalarWhereWithAggregatesInput = {
   role?: Prisma.EnumRoleWithAggregatesFilter<"User"> | $Enums.Role
   groupRole?: Prisma.EnumGroupRoleNullableWithAggregatesFilter<"User"> | $Enums.GroupRole | null
   studentId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
-  onboadingAnswers?: Prisma.JsonNullableWithAggregatesFilter<"User">
-  hasCompletedOnboading?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  onboardingAnswers?: Prisma.JsonNullableWithAggregatesFilter<"User">
+  hasCompletedOnboarding?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  mustChangePassword?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   academicGroupId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
@@ -341,14 +353,15 @@ export type UserCreateInput = {
   role: $Enums.Role
   groupRole?: $Enums.GroupRole | null
   studentId?: string | null
-  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  hasCompletedOnboading?: boolean
+  onboardingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboarding?: boolean
+  mustChangePassword?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   academicGroup?: Prisma.AcademicGroupCreateNestedOneWithoutStudentsInput
-  courseOfferings?: Prisma.CourseOfferingCreateNestedManyWithoutLecturerInput
   enrollments?: Prisma.EnrollmentCreateNestedManyWithoutStudentInput
-  attendanceSessions?: Prisma.AttendanceSessionCreateNestedManyWithoutStartedByInput
+  taughtOfferings?: Prisma.CourseOfferingCreateNestedManyWithoutLecturerInput
+  startedSessions?: Prisma.AttendanceSessionCreateNestedManyWithoutStartedByInput
   attendanceRecords?: Prisma.AttendanceRecordCreateNestedManyWithoutStudentInput
 }
 
@@ -361,14 +374,15 @@ export type UserUncheckedCreateInput = {
   role: $Enums.Role
   groupRole?: $Enums.GroupRole | null
   studentId?: string | null
-  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  hasCompletedOnboading?: boolean
+  onboardingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboarding?: boolean
+  mustChangePassword?: boolean
   academicGroupId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  courseOfferings?: Prisma.CourseOfferingUncheckedCreateNestedManyWithoutLecturerInput
   enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutStudentInput
-  attendanceSessions?: Prisma.AttendanceSessionUncheckedCreateNestedManyWithoutStartedByInput
+  taughtOfferings?: Prisma.CourseOfferingUncheckedCreateNestedManyWithoutLecturerInput
+  startedSessions?: Prisma.AttendanceSessionUncheckedCreateNestedManyWithoutStartedByInput
   attendanceRecords?: Prisma.AttendanceRecordUncheckedCreateNestedManyWithoutStudentInput
 }
 
@@ -381,14 +395,15 @@ export type UserUpdateInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   groupRole?: Prisma.NullableEnumGroupRoleFieldUpdateOperationsInput | $Enums.GroupRole | null
   studentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  hasCompletedOnboading?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboarding?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  mustChangePassword?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   academicGroup?: Prisma.AcademicGroupUpdateOneWithoutStudentsNestedInput
-  courseOfferings?: Prisma.CourseOfferingUpdateManyWithoutLecturerNestedInput
   enrollments?: Prisma.EnrollmentUpdateManyWithoutStudentNestedInput
-  attendanceSessions?: Prisma.AttendanceSessionUpdateManyWithoutStartedByNestedInput
+  taughtOfferings?: Prisma.CourseOfferingUpdateManyWithoutLecturerNestedInput
+  startedSessions?: Prisma.AttendanceSessionUpdateManyWithoutStartedByNestedInput
   attendanceRecords?: Prisma.AttendanceRecordUpdateManyWithoutStudentNestedInput
 }
 
@@ -401,14 +416,15 @@ export type UserUncheckedUpdateInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   groupRole?: Prisma.NullableEnumGroupRoleFieldUpdateOperationsInput | $Enums.GroupRole | null
   studentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  hasCompletedOnboading?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboarding?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  mustChangePassword?: Prisma.BoolFieldUpdateOperationsInput | boolean
   academicGroupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  courseOfferings?: Prisma.CourseOfferingUncheckedUpdateManyWithoutLecturerNestedInput
   enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutStudentNestedInput
-  attendanceSessions?: Prisma.AttendanceSessionUncheckedUpdateManyWithoutStartedByNestedInput
+  taughtOfferings?: Prisma.CourseOfferingUncheckedUpdateManyWithoutLecturerNestedInput
+  startedSessions?: Prisma.AttendanceSessionUncheckedUpdateManyWithoutStartedByNestedInput
   attendanceRecords?: Prisma.AttendanceRecordUncheckedUpdateManyWithoutStudentNestedInput
 }
 
@@ -421,8 +437,9 @@ export type UserCreateManyInput = {
   role: $Enums.Role
   groupRole?: $Enums.GroupRole | null
   studentId?: string | null
-  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  hasCompletedOnboading?: boolean
+  onboardingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboarding?: boolean
+  mustChangePassword?: boolean
   academicGroupId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -437,8 +454,9 @@ export type UserUpdateManyMutationInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   groupRole?: Prisma.NullableEnumGroupRoleFieldUpdateOperationsInput | $Enums.GroupRole | null
   studentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  hasCompletedOnboading?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboarding?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  mustChangePassword?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -452,8 +470,9 @@ export type UserUncheckedUpdateManyInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   groupRole?: Prisma.NullableEnumGroupRoleFieldUpdateOperationsInput | $Enums.GroupRole | null
   studentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  hasCompletedOnboading?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboarding?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  mustChangePassword?: Prisma.BoolFieldUpdateOperationsInput | boolean
   academicGroupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -478,8 +497,9 @@ export type UserCountOrderByAggregateInput = {
   role?: Prisma.SortOrder
   groupRole?: Prisma.SortOrder
   studentId?: Prisma.SortOrder
-  onboadingAnswers?: Prisma.SortOrder
-  hasCompletedOnboading?: Prisma.SortOrder
+  onboardingAnswers?: Prisma.SortOrder
+  hasCompletedOnboarding?: Prisma.SortOrder
+  mustChangePassword?: Prisma.SortOrder
   academicGroupId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -494,7 +514,8 @@ export type UserMaxOrderByAggregateInput = {
   role?: Prisma.SortOrder
   groupRole?: Prisma.SortOrder
   studentId?: Prisma.SortOrder
-  hasCompletedOnboading?: Prisma.SortOrder
+  hasCompletedOnboarding?: Prisma.SortOrder
+  mustChangePassword?: Prisma.SortOrder
   academicGroupId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -509,7 +530,8 @@ export type UserMinOrderByAggregateInput = {
   role?: Prisma.SortOrder
   groupRole?: Prisma.SortOrder
   studentId?: Prisma.SortOrder
-  hasCompletedOnboading?: Prisma.SortOrder
+  hasCompletedOnboarding?: Prisma.SortOrder
+  mustChangePassword?: Prisma.SortOrder
   academicGroupId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -574,18 +596,18 @@ export type BoolFieldUpdateOperationsInput = {
   set?: boolean
 }
 
-export type UserCreateNestedOneWithoutCourseOfferingsInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutCourseOfferingsInput, Prisma.UserUncheckedCreateWithoutCourseOfferingsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCourseOfferingsInput
+export type UserCreateNestedOneWithoutTaughtOfferingsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTaughtOfferingsInput, Prisma.UserUncheckedCreateWithoutTaughtOfferingsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTaughtOfferingsInput
   connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpdateOneRequiredWithoutCourseOfferingsNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutCourseOfferingsInput, Prisma.UserUncheckedCreateWithoutCourseOfferingsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCourseOfferingsInput
-  upsert?: Prisma.UserUpsertWithoutCourseOfferingsInput
+export type UserUpdateOneRequiredWithoutTaughtOfferingsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTaughtOfferingsInput, Prisma.UserUncheckedCreateWithoutTaughtOfferingsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTaughtOfferingsInput
+  upsert?: Prisma.UserUpsertWithoutTaughtOfferingsInput
   connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCourseOfferingsInput, Prisma.UserUpdateWithoutCourseOfferingsInput>, Prisma.UserUncheckedUpdateWithoutCourseOfferingsInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutTaughtOfferingsInput, Prisma.UserUpdateWithoutTaughtOfferingsInput>, Prisma.UserUncheckedUpdateWithoutTaughtOfferingsInput>
 }
 
 export type UserCreateNestedOneWithoutEnrollmentsInput = {
@@ -602,18 +624,18 @@ export type UserUpdateOneRequiredWithoutEnrollmentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutEnrollmentsInput, Prisma.UserUpdateWithoutEnrollmentsInput>, Prisma.UserUncheckedUpdateWithoutEnrollmentsInput>
 }
 
-export type UserCreateNestedOneWithoutAttendanceSessionsInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutAttendanceSessionsInput, Prisma.UserUncheckedCreateWithoutAttendanceSessionsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAttendanceSessionsInput
+export type UserCreateNestedOneWithoutStartedSessionsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStartedSessionsInput, Prisma.UserUncheckedCreateWithoutStartedSessionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStartedSessionsInput
   connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpdateOneRequiredWithoutAttendanceSessionsNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutAttendanceSessionsInput, Prisma.UserUncheckedCreateWithoutAttendanceSessionsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAttendanceSessionsInput
-  upsert?: Prisma.UserUpsertWithoutAttendanceSessionsInput
+export type UserUpdateOneRequiredWithoutStartedSessionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStartedSessionsInput, Prisma.UserUncheckedCreateWithoutStartedSessionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStartedSessionsInput
+  upsert?: Prisma.UserUpsertWithoutStartedSessionsInput
   connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAttendanceSessionsInput, Prisma.UserUpdateWithoutAttendanceSessionsInput>, Prisma.UserUncheckedUpdateWithoutAttendanceSessionsInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutStartedSessionsInput, Prisma.UserUpdateWithoutStartedSessionsInput>, Prisma.UserUncheckedUpdateWithoutStartedSessionsInput>
 }
 
 export type UserCreateNestedOneWithoutAttendanceRecordsInput = {
@@ -639,13 +661,14 @@ export type UserCreateWithoutAcademicGroupInput = {
   role: $Enums.Role
   groupRole?: $Enums.GroupRole | null
   studentId?: string | null
-  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  hasCompletedOnboading?: boolean
+  onboardingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboarding?: boolean
+  mustChangePassword?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  courseOfferings?: Prisma.CourseOfferingCreateNestedManyWithoutLecturerInput
   enrollments?: Prisma.EnrollmentCreateNestedManyWithoutStudentInput
-  attendanceSessions?: Prisma.AttendanceSessionCreateNestedManyWithoutStartedByInput
+  taughtOfferings?: Prisma.CourseOfferingCreateNestedManyWithoutLecturerInput
+  startedSessions?: Prisma.AttendanceSessionCreateNestedManyWithoutStartedByInput
   attendanceRecords?: Prisma.AttendanceRecordCreateNestedManyWithoutStudentInput
 }
 
@@ -658,13 +681,14 @@ export type UserUncheckedCreateWithoutAcademicGroupInput = {
   role: $Enums.Role
   groupRole?: $Enums.GroupRole | null
   studentId?: string | null
-  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  hasCompletedOnboading?: boolean
+  onboardingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboarding?: boolean
+  mustChangePassword?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  courseOfferings?: Prisma.CourseOfferingUncheckedCreateNestedManyWithoutLecturerInput
   enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutStudentInput
-  attendanceSessions?: Prisma.AttendanceSessionUncheckedCreateNestedManyWithoutStartedByInput
+  taughtOfferings?: Prisma.CourseOfferingUncheckedCreateNestedManyWithoutLecturerInput
+  startedSessions?: Prisma.AttendanceSessionUncheckedCreateNestedManyWithoutStartedByInput
   attendanceRecords?: Prisma.AttendanceRecordUncheckedCreateNestedManyWithoutStudentInput
 }
 
@@ -706,14 +730,15 @@ export type UserScalarWhereInput = {
   role?: Prisma.EnumRoleFilter<"User"> | $Enums.Role
   groupRole?: Prisma.EnumGroupRoleNullableFilter<"User"> | $Enums.GroupRole | null
   studentId?: Prisma.StringNullableFilter<"User"> | string | null
-  onboadingAnswers?: Prisma.JsonNullableFilter<"User">
-  hasCompletedOnboading?: Prisma.BoolFilter<"User"> | boolean
+  onboardingAnswers?: Prisma.JsonNullableFilter<"User">
+  hasCompletedOnboarding?: Prisma.BoolFilter<"User"> | boolean
+  mustChangePassword?: Prisma.BoolFilter<"User"> | boolean
   academicGroupId?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
 }
 
-export type UserCreateWithoutCourseOfferingsInput = {
+export type UserCreateWithoutTaughtOfferingsInput = {
   id?: string
   firstName: string
   lastName: string
@@ -722,17 +747,18 @@ export type UserCreateWithoutCourseOfferingsInput = {
   role: $Enums.Role
   groupRole?: $Enums.GroupRole | null
   studentId?: string | null
-  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  hasCompletedOnboading?: boolean
+  onboardingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboarding?: boolean
+  mustChangePassword?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   academicGroup?: Prisma.AcademicGroupCreateNestedOneWithoutStudentsInput
   enrollments?: Prisma.EnrollmentCreateNestedManyWithoutStudentInput
-  attendanceSessions?: Prisma.AttendanceSessionCreateNestedManyWithoutStartedByInput
+  startedSessions?: Prisma.AttendanceSessionCreateNestedManyWithoutStartedByInput
   attendanceRecords?: Prisma.AttendanceRecordCreateNestedManyWithoutStudentInput
 }
 
-export type UserUncheckedCreateWithoutCourseOfferingsInput = {
+export type UserUncheckedCreateWithoutTaughtOfferingsInput = {
   id?: string
   firstName: string
   lastName: string
@@ -741,33 +767,34 @@ export type UserUncheckedCreateWithoutCourseOfferingsInput = {
   role: $Enums.Role
   groupRole?: $Enums.GroupRole | null
   studentId?: string | null
-  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  hasCompletedOnboading?: boolean
+  onboardingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboarding?: boolean
+  mustChangePassword?: boolean
   academicGroupId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutStudentInput
-  attendanceSessions?: Prisma.AttendanceSessionUncheckedCreateNestedManyWithoutStartedByInput
+  startedSessions?: Prisma.AttendanceSessionUncheckedCreateNestedManyWithoutStartedByInput
   attendanceRecords?: Prisma.AttendanceRecordUncheckedCreateNestedManyWithoutStudentInput
 }
 
-export type UserCreateOrConnectWithoutCourseOfferingsInput = {
+export type UserCreateOrConnectWithoutTaughtOfferingsInput = {
   where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutCourseOfferingsInput, Prisma.UserUncheckedCreateWithoutCourseOfferingsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutTaughtOfferingsInput, Prisma.UserUncheckedCreateWithoutTaughtOfferingsInput>
 }
 
-export type UserUpsertWithoutCourseOfferingsInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutCourseOfferingsInput, Prisma.UserUncheckedUpdateWithoutCourseOfferingsInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutCourseOfferingsInput, Prisma.UserUncheckedCreateWithoutCourseOfferingsInput>
+export type UserUpsertWithoutTaughtOfferingsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutTaughtOfferingsInput, Prisma.UserUncheckedUpdateWithoutTaughtOfferingsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutTaughtOfferingsInput, Prisma.UserUncheckedCreateWithoutTaughtOfferingsInput>
   where?: Prisma.UserWhereInput
 }
 
-export type UserUpdateToOneWithWhereWithoutCourseOfferingsInput = {
+export type UserUpdateToOneWithWhereWithoutTaughtOfferingsInput = {
   where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutCourseOfferingsInput, Prisma.UserUncheckedUpdateWithoutCourseOfferingsInput>
+  data: Prisma.XOR<Prisma.UserUpdateWithoutTaughtOfferingsInput, Prisma.UserUncheckedUpdateWithoutTaughtOfferingsInput>
 }
 
-export type UserUpdateWithoutCourseOfferingsInput = {
+export type UserUpdateWithoutTaughtOfferingsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -776,17 +803,18 @@ export type UserUpdateWithoutCourseOfferingsInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   groupRole?: Prisma.NullableEnumGroupRoleFieldUpdateOperationsInput | $Enums.GroupRole | null
   studentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  hasCompletedOnboading?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboarding?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  mustChangePassword?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   academicGroup?: Prisma.AcademicGroupUpdateOneWithoutStudentsNestedInput
   enrollments?: Prisma.EnrollmentUpdateManyWithoutStudentNestedInput
-  attendanceSessions?: Prisma.AttendanceSessionUpdateManyWithoutStartedByNestedInput
+  startedSessions?: Prisma.AttendanceSessionUpdateManyWithoutStartedByNestedInput
   attendanceRecords?: Prisma.AttendanceRecordUpdateManyWithoutStudentNestedInput
 }
 
-export type UserUncheckedUpdateWithoutCourseOfferingsInput = {
+export type UserUncheckedUpdateWithoutTaughtOfferingsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -795,13 +823,14 @@ export type UserUncheckedUpdateWithoutCourseOfferingsInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   groupRole?: Prisma.NullableEnumGroupRoleFieldUpdateOperationsInput | $Enums.GroupRole | null
   studentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  hasCompletedOnboading?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboarding?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  mustChangePassword?: Prisma.BoolFieldUpdateOperationsInput | boolean
   academicGroupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutStudentNestedInput
-  attendanceSessions?: Prisma.AttendanceSessionUncheckedUpdateManyWithoutStartedByNestedInput
+  startedSessions?: Prisma.AttendanceSessionUncheckedUpdateManyWithoutStartedByNestedInput
   attendanceRecords?: Prisma.AttendanceRecordUncheckedUpdateManyWithoutStudentNestedInput
 }
 
@@ -814,13 +843,14 @@ export type UserCreateWithoutEnrollmentsInput = {
   role: $Enums.Role
   groupRole?: $Enums.GroupRole | null
   studentId?: string | null
-  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  hasCompletedOnboading?: boolean
+  onboardingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboarding?: boolean
+  mustChangePassword?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   academicGroup?: Prisma.AcademicGroupCreateNestedOneWithoutStudentsInput
-  courseOfferings?: Prisma.CourseOfferingCreateNestedManyWithoutLecturerInput
-  attendanceSessions?: Prisma.AttendanceSessionCreateNestedManyWithoutStartedByInput
+  taughtOfferings?: Prisma.CourseOfferingCreateNestedManyWithoutLecturerInput
+  startedSessions?: Prisma.AttendanceSessionCreateNestedManyWithoutStartedByInput
   attendanceRecords?: Prisma.AttendanceRecordCreateNestedManyWithoutStudentInput
 }
 
@@ -833,13 +863,14 @@ export type UserUncheckedCreateWithoutEnrollmentsInput = {
   role: $Enums.Role
   groupRole?: $Enums.GroupRole | null
   studentId?: string | null
-  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  hasCompletedOnboading?: boolean
+  onboardingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboarding?: boolean
+  mustChangePassword?: boolean
   academicGroupId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  courseOfferings?: Prisma.CourseOfferingUncheckedCreateNestedManyWithoutLecturerInput
-  attendanceSessions?: Prisma.AttendanceSessionUncheckedCreateNestedManyWithoutStartedByInput
+  taughtOfferings?: Prisma.CourseOfferingUncheckedCreateNestedManyWithoutLecturerInput
+  startedSessions?: Prisma.AttendanceSessionUncheckedCreateNestedManyWithoutStartedByInput
   attendanceRecords?: Prisma.AttendanceRecordUncheckedCreateNestedManyWithoutStudentInput
 }
 
@@ -868,13 +899,14 @@ export type UserUpdateWithoutEnrollmentsInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   groupRole?: Prisma.NullableEnumGroupRoleFieldUpdateOperationsInput | $Enums.GroupRole | null
   studentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  hasCompletedOnboading?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboarding?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  mustChangePassword?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   academicGroup?: Prisma.AcademicGroupUpdateOneWithoutStudentsNestedInput
-  courseOfferings?: Prisma.CourseOfferingUpdateManyWithoutLecturerNestedInput
-  attendanceSessions?: Prisma.AttendanceSessionUpdateManyWithoutStartedByNestedInput
+  taughtOfferings?: Prisma.CourseOfferingUpdateManyWithoutLecturerNestedInput
+  startedSessions?: Prisma.AttendanceSessionUpdateManyWithoutStartedByNestedInput
   attendanceRecords?: Prisma.AttendanceRecordUpdateManyWithoutStudentNestedInput
 }
 
@@ -887,17 +919,18 @@ export type UserUncheckedUpdateWithoutEnrollmentsInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   groupRole?: Prisma.NullableEnumGroupRoleFieldUpdateOperationsInput | $Enums.GroupRole | null
   studentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  hasCompletedOnboading?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboarding?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  mustChangePassword?: Prisma.BoolFieldUpdateOperationsInput | boolean
   academicGroupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  courseOfferings?: Prisma.CourseOfferingUncheckedUpdateManyWithoutLecturerNestedInput
-  attendanceSessions?: Prisma.AttendanceSessionUncheckedUpdateManyWithoutStartedByNestedInput
+  taughtOfferings?: Prisma.CourseOfferingUncheckedUpdateManyWithoutLecturerNestedInput
+  startedSessions?: Prisma.AttendanceSessionUncheckedUpdateManyWithoutStartedByNestedInput
   attendanceRecords?: Prisma.AttendanceRecordUncheckedUpdateManyWithoutStudentNestedInput
 }
 
-export type UserCreateWithoutAttendanceSessionsInput = {
+export type UserCreateWithoutStartedSessionsInput = {
   id?: string
   firstName: string
   lastName: string
@@ -906,17 +939,18 @@ export type UserCreateWithoutAttendanceSessionsInput = {
   role: $Enums.Role
   groupRole?: $Enums.GroupRole | null
   studentId?: string | null
-  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  hasCompletedOnboading?: boolean
+  onboardingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboarding?: boolean
+  mustChangePassword?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   academicGroup?: Prisma.AcademicGroupCreateNestedOneWithoutStudentsInput
-  courseOfferings?: Prisma.CourseOfferingCreateNestedManyWithoutLecturerInput
   enrollments?: Prisma.EnrollmentCreateNestedManyWithoutStudentInput
+  taughtOfferings?: Prisma.CourseOfferingCreateNestedManyWithoutLecturerInput
   attendanceRecords?: Prisma.AttendanceRecordCreateNestedManyWithoutStudentInput
 }
 
-export type UserUncheckedCreateWithoutAttendanceSessionsInput = {
+export type UserUncheckedCreateWithoutStartedSessionsInput = {
   id?: string
   firstName: string
   lastName: string
@@ -925,33 +959,34 @@ export type UserUncheckedCreateWithoutAttendanceSessionsInput = {
   role: $Enums.Role
   groupRole?: $Enums.GroupRole | null
   studentId?: string | null
-  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  hasCompletedOnboading?: boolean
+  onboardingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboarding?: boolean
+  mustChangePassword?: boolean
   academicGroupId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  courseOfferings?: Prisma.CourseOfferingUncheckedCreateNestedManyWithoutLecturerInput
   enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutStudentInput
+  taughtOfferings?: Prisma.CourseOfferingUncheckedCreateNestedManyWithoutLecturerInput
   attendanceRecords?: Prisma.AttendanceRecordUncheckedCreateNestedManyWithoutStudentInput
 }
 
-export type UserCreateOrConnectWithoutAttendanceSessionsInput = {
+export type UserCreateOrConnectWithoutStartedSessionsInput = {
   where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutAttendanceSessionsInput, Prisma.UserUncheckedCreateWithoutAttendanceSessionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutStartedSessionsInput, Prisma.UserUncheckedCreateWithoutStartedSessionsInput>
 }
 
-export type UserUpsertWithoutAttendanceSessionsInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutAttendanceSessionsInput, Prisma.UserUncheckedUpdateWithoutAttendanceSessionsInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutAttendanceSessionsInput, Prisma.UserUncheckedCreateWithoutAttendanceSessionsInput>
+export type UserUpsertWithoutStartedSessionsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutStartedSessionsInput, Prisma.UserUncheckedUpdateWithoutStartedSessionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutStartedSessionsInput, Prisma.UserUncheckedCreateWithoutStartedSessionsInput>
   where?: Prisma.UserWhereInput
 }
 
-export type UserUpdateToOneWithWhereWithoutAttendanceSessionsInput = {
+export type UserUpdateToOneWithWhereWithoutStartedSessionsInput = {
   where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutAttendanceSessionsInput, Prisma.UserUncheckedUpdateWithoutAttendanceSessionsInput>
+  data: Prisma.XOR<Prisma.UserUpdateWithoutStartedSessionsInput, Prisma.UserUncheckedUpdateWithoutStartedSessionsInput>
 }
 
-export type UserUpdateWithoutAttendanceSessionsInput = {
+export type UserUpdateWithoutStartedSessionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -960,17 +995,18 @@ export type UserUpdateWithoutAttendanceSessionsInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   groupRole?: Prisma.NullableEnumGroupRoleFieldUpdateOperationsInput | $Enums.GroupRole | null
   studentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  hasCompletedOnboading?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboarding?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  mustChangePassword?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   academicGroup?: Prisma.AcademicGroupUpdateOneWithoutStudentsNestedInput
-  courseOfferings?: Prisma.CourseOfferingUpdateManyWithoutLecturerNestedInput
   enrollments?: Prisma.EnrollmentUpdateManyWithoutStudentNestedInput
+  taughtOfferings?: Prisma.CourseOfferingUpdateManyWithoutLecturerNestedInput
   attendanceRecords?: Prisma.AttendanceRecordUpdateManyWithoutStudentNestedInput
 }
 
-export type UserUncheckedUpdateWithoutAttendanceSessionsInput = {
+export type UserUncheckedUpdateWithoutStartedSessionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -979,13 +1015,14 @@ export type UserUncheckedUpdateWithoutAttendanceSessionsInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   groupRole?: Prisma.NullableEnumGroupRoleFieldUpdateOperationsInput | $Enums.GroupRole | null
   studentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  hasCompletedOnboading?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboarding?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  mustChangePassword?: Prisma.BoolFieldUpdateOperationsInput | boolean
   academicGroupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  courseOfferings?: Prisma.CourseOfferingUncheckedUpdateManyWithoutLecturerNestedInput
   enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutStudentNestedInput
+  taughtOfferings?: Prisma.CourseOfferingUncheckedUpdateManyWithoutLecturerNestedInput
   attendanceRecords?: Prisma.AttendanceRecordUncheckedUpdateManyWithoutStudentNestedInput
 }
 
@@ -998,14 +1035,15 @@ export type UserCreateWithoutAttendanceRecordsInput = {
   role: $Enums.Role
   groupRole?: $Enums.GroupRole | null
   studentId?: string | null
-  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  hasCompletedOnboading?: boolean
+  onboardingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboarding?: boolean
+  mustChangePassword?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   academicGroup?: Prisma.AcademicGroupCreateNestedOneWithoutStudentsInput
-  courseOfferings?: Prisma.CourseOfferingCreateNestedManyWithoutLecturerInput
   enrollments?: Prisma.EnrollmentCreateNestedManyWithoutStudentInput
-  attendanceSessions?: Prisma.AttendanceSessionCreateNestedManyWithoutStartedByInput
+  taughtOfferings?: Prisma.CourseOfferingCreateNestedManyWithoutLecturerInput
+  startedSessions?: Prisma.AttendanceSessionCreateNestedManyWithoutStartedByInput
 }
 
 export type UserUncheckedCreateWithoutAttendanceRecordsInput = {
@@ -1017,14 +1055,15 @@ export type UserUncheckedCreateWithoutAttendanceRecordsInput = {
   role: $Enums.Role
   groupRole?: $Enums.GroupRole | null
   studentId?: string | null
-  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  hasCompletedOnboading?: boolean
+  onboardingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboarding?: boolean
+  mustChangePassword?: boolean
   academicGroupId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  courseOfferings?: Prisma.CourseOfferingUncheckedCreateNestedManyWithoutLecturerInput
   enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutStudentInput
-  attendanceSessions?: Prisma.AttendanceSessionUncheckedCreateNestedManyWithoutStartedByInput
+  taughtOfferings?: Prisma.CourseOfferingUncheckedCreateNestedManyWithoutLecturerInput
+  startedSessions?: Prisma.AttendanceSessionUncheckedCreateNestedManyWithoutStartedByInput
 }
 
 export type UserCreateOrConnectWithoutAttendanceRecordsInput = {
@@ -1052,14 +1091,15 @@ export type UserUpdateWithoutAttendanceRecordsInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   groupRole?: Prisma.NullableEnumGroupRoleFieldUpdateOperationsInput | $Enums.GroupRole | null
   studentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  hasCompletedOnboading?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboarding?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  mustChangePassword?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   academicGroup?: Prisma.AcademicGroupUpdateOneWithoutStudentsNestedInput
-  courseOfferings?: Prisma.CourseOfferingUpdateManyWithoutLecturerNestedInput
   enrollments?: Prisma.EnrollmentUpdateManyWithoutStudentNestedInput
-  attendanceSessions?: Prisma.AttendanceSessionUpdateManyWithoutStartedByNestedInput
+  taughtOfferings?: Prisma.CourseOfferingUpdateManyWithoutLecturerNestedInput
+  startedSessions?: Prisma.AttendanceSessionUpdateManyWithoutStartedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAttendanceRecordsInput = {
@@ -1071,14 +1111,15 @@ export type UserUncheckedUpdateWithoutAttendanceRecordsInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   groupRole?: Prisma.NullableEnumGroupRoleFieldUpdateOperationsInput | $Enums.GroupRole | null
   studentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  hasCompletedOnboading?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboarding?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  mustChangePassword?: Prisma.BoolFieldUpdateOperationsInput | boolean
   academicGroupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  courseOfferings?: Prisma.CourseOfferingUncheckedUpdateManyWithoutLecturerNestedInput
   enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutStudentNestedInput
-  attendanceSessions?: Prisma.AttendanceSessionUncheckedUpdateManyWithoutStartedByNestedInput
+  taughtOfferings?: Prisma.CourseOfferingUncheckedUpdateManyWithoutLecturerNestedInput
+  startedSessions?: Prisma.AttendanceSessionUncheckedUpdateManyWithoutStartedByNestedInput
 }
 
 export type UserCreateManyAcademicGroupInput = {
@@ -1090,8 +1131,9 @@ export type UserCreateManyAcademicGroupInput = {
   role: $Enums.Role
   groupRole?: $Enums.GroupRole | null
   studentId?: string | null
-  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  hasCompletedOnboading?: boolean
+  onboardingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboarding?: boolean
+  mustChangePassword?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1105,13 +1147,14 @@ export type UserUpdateWithoutAcademicGroupInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   groupRole?: Prisma.NullableEnumGroupRoleFieldUpdateOperationsInput | $Enums.GroupRole | null
   studentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  hasCompletedOnboading?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboarding?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  mustChangePassword?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  courseOfferings?: Prisma.CourseOfferingUpdateManyWithoutLecturerNestedInput
   enrollments?: Prisma.EnrollmentUpdateManyWithoutStudentNestedInput
-  attendanceSessions?: Prisma.AttendanceSessionUpdateManyWithoutStartedByNestedInput
+  taughtOfferings?: Prisma.CourseOfferingUpdateManyWithoutLecturerNestedInput
+  startedSessions?: Prisma.AttendanceSessionUpdateManyWithoutStartedByNestedInput
   attendanceRecords?: Prisma.AttendanceRecordUpdateManyWithoutStudentNestedInput
 }
 
@@ -1124,13 +1167,14 @@ export type UserUncheckedUpdateWithoutAcademicGroupInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   groupRole?: Prisma.NullableEnumGroupRoleFieldUpdateOperationsInput | $Enums.GroupRole | null
   studentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  hasCompletedOnboading?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboarding?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  mustChangePassword?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  courseOfferings?: Prisma.CourseOfferingUncheckedUpdateManyWithoutLecturerNestedInput
   enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutStudentNestedInput
-  attendanceSessions?: Prisma.AttendanceSessionUncheckedUpdateManyWithoutStartedByNestedInput
+  taughtOfferings?: Prisma.CourseOfferingUncheckedUpdateManyWithoutLecturerNestedInput
+  startedSessions?: Prisma.AttendanceSessionUncheckedUpdateManyWithoutStartedByNestedInput
   attendanceRecords?: Prisma.AttendanceRecordUncheckedUpdateManyWithoutStudentNestedInput
 }
 
@@ -1143,8 +1187,9 @@ export type UserUncheckedUpdateManyWithoutAcademicGroupInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   groupRole?: Prisma.NullableEnumGroupRoleFieldUpdateOperationsInput | $Enums.GroupRole | null
   studentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  onboadingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  hasCompletedOnboading?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingAnswers?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  hasCompletedOnboarding?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  mustChangePassword?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1155,16 +1200,16 @@ export type UserUncheckedUpdateManyWithoutAcademicGroupInput = {
  */
 
 export type UserCountOutputType = {
-  courseOfferings: number
   enrollments: number
-  attendanceSessions: number
+  taughtOfferings: number
+  startedSessions: number
   attendanceRecords: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  courseOfferings?: boolean | UserCountOutputTypeCountCourseOfferingsArgs
   enrollments?: boolean | UserCountOutputTypeCountEnrollmentsArgs
-  attendanceSessions?: boolean | UserCountOutputTypeCountAttendanceSessionsArgs
+  taughtOfferings?: boolean | UserCountOutputTypeCountTaughtOfferingsArgs
+  startedSessions?: boolean | UserCountOutputTypeCountStartedSessionsArgs
   attendanceRecords?: boolean | UserCountOutputTypeCountAttendanceRecordsArgs
 }
 
@@ -1181,13 +1226,6 @@ export type UserCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountCourseOfferingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.CourseOfferingWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
 export type UserCountOutputTypeCountEnrollmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.EnrollmentWhereInput
 }
@@ -1195,7 +1233,14 @@ export type UserCountOutputTypeCountEnrollmentsArgs<ExtArgs extends runtime.Type
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountAttendanceSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type UserCountOutputTypeCountTaughtOfferingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CourseOfferingWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountStartedSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.AttendanceSessionWhereInput
 }
 
@@ -1216,15 +1261,16 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   role?: boolean
   groupRole?: boolean
   studentId?: boolean
-  onboadingAnswers?: boolean
-  hasCompletedOnboading?: boolean
+  onboardingAnswers?: boolean
+  hasCompletedOnboarding?: boolean
+  mustChangePassword?: boolean
   academicGroupId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   academicGroup?: boolean | Prisma.User$academicGroupArgs<ExtArgs>
-  courseOfferings?: boolean | Prisma.User$courseOfferingsArgs<ExtArgs>
   enrollments?: boolean | Prisma.User$enrollmentsArgs<ExtArgs>
-  attendanceSessions?: boolean | Prisma.User$attendanceSessionsArgs<ExtArgs>
+  taughtOfferings?: boolean | Prisma.User$taughtOfferingsArgs<ExtArgs>
+  startedSessions?: boolean | Prisma.User$startedSessionsArgs<ExtArgs>
   attendanceRecords?: boolean | Prisma.User$attendanceRecordsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
@@ -1238,8 +1284,9 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   role?: boolean
   groupRole?: boolean
   studentId?: boolean
-  onboadingAnswers?: boolean
-  hasCompletedOnboading?: boolean
+  onboardingAnswers?: boolean
+  hasCompletedOnboarding?: boolean
+  mustChangePassword?: boolean
   academicGroupId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1255,8 +1302,9 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   role?: boolean
   groupRole?: boolean
   studentId?: boolean
-  onboadingAnswers?: boolean
-  hasCompletedOnboading?: boolean
+  onboardingAnswers?: boolean
+  hasCompletedOnboarding?: boolean
+  mustChangePassword?: boolean
   academicGroupId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1272,19 +1320,20 @@ export type UserSelectScalar = {
   role?: boolean
   groupRole?: boolean
   studentId?: boolean
-  onboadingAnswers?: boolean
-  hasCompletedOnboading?: boolean
+  onboardingAnswers?: boolean
+  hasCompletedOnboarding?: boolean
+  mustChangePassword?: boolean
   academicGroupId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstName" | "lastName" | "email" | "password" | "role" | "groupRole" | "studentId" | "onboadingAnswers" | "hasCompletedOnboading" | "academicGroupId" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstName" | "lastName" | "email" | "password" | "role" | "groupRole" | "studentId" | "onboardingAnswers" | "hasCompletedOnboarding" | "mustChangePassword" | "academicGroupId" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   academicGroup?: boolean | Prisma.User$academicGroupArgs<ExtArgs>
-  courseOfferings?: boolean | Prisma.User$courseOfferingsArgs<ExtArgs>
   enrollments?: boolean | Prisma.User$enrollmentsArgs<ExtArgs>
-  attendanceSessions?: boolean | Prisma.User$attendanceSessionsArgs<ExtArgs>
+  taughtOfferings?: boolean | Prisma.User$taughtOfferingsArgs<ExtArgs>
+  startedSessions?: boolean | Prisma.User$startedSessionsArgs<ExtArgs>
   attendanceRecords?: boolean | Prisma.User$attendanceRecordsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -1299,9 +1348,9 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   name: "User"
   objects: {
     academicGroup: Prisma.$AcademicGroupPayload<ExtArgs> | null
-    courseOfferings: Prisma.$CourseOfferingPayload<ExtArgs>[]
     enrollments: Prisma.$EnrollmentPayload<ExtArgs>[]
-    attendanceSessions: Prisma.$AttendanceSessionPayload<ExtArgs>[]
+    taughtOfferings: Prisma.$CourseOfferingPayload<ExtArgs>[]
+    startedSessions: Prisma.$AttendanceSessionPayload<ExtArgs>[]
     attendanceRecords: Prisma.$AttendanceRecordPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1313,8 +1362,9 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     role: $Enums.Role
     groupRole: $Enums.GroupRole | null
     studentId: string | null
-    onboadingAnswers: runtime.JsonValue | null
-    hasCompletedOnboading: boolean
+    onboardingAnswers: runtime.JsonValue | null
+    hasCompletedOnboarding: boolean
+    mustChangePassword: boolean
     academicGroupId: string | null
     createdAt: Date
     updatedAt: Date
@@ -1713,9 +1763,9 @@ readonly fields: UserFieldRefs;
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   academicGroup<T extends Prisma.User$academicGroupArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$academicGroupArgs<ExtArgs>>): Prisma.Prisma__AcademicGroupClient<runtime.Types.Result.GetResult<Prisma.$AcademicGroupPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  courseOfferings<T extends Prisma.User$courseOfferingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$courseOfferingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CourseOfferingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   enrollments<T extends Prisma.User$enrollmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$enrollmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EnrollmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  attendanceSessions<T extends Prisma.User$attendanceSessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$attendanceSessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AttendanceSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  taughtOfferings<T extends Prisma.User$taughtOfferingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$taughtOfferingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CourseOfferingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  startedSessions<T extends Prisma.User$startedSessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$startedSessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AttendanceSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   attendanceRecords<T extends Prisma.User$attendanceRecordsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$attendanceRecordsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AttendanceRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1754,8 +1804,9 @@ export interface UserFieldRefs {
   readonly role: Prisma.FieldRef<"User", 'Role'>
   readonly groupRole: Prisma.FieldRef<"User", 'GroupRole'>
   readonly studentId: Prisma.FieldRef<"User", 'String'>
-  readonly onboadingAnswers: Prisma.FieldRef<"User", 'Json'>
-  readonly hasCompletedOnboading: Prisma.FieldRef<"User", 'Boolean'>
+  readonly onboardingAnswers: Prisma.FieldRef<"User", 'Json'>
+  readonly hasCompletedOnboarding: Prisma.FieldRef<"User", 'Boolean'>
+  readonly mustChangePassword: Prisma.FieldRef<"User", 'Boolean'>
   readonly academicGroupId: Prisma.FieldRef<"User", 'String'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
@@ -2179,30 +2230,6 @@ export type User$academicGroupArgs<ExtArgs extends runtime.Types.Extensions.Inte
 }
 
 /**
- * User.courseOfferings
- */
-export type User$courseOfferingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the CourseOffering
-   */
-  select?: Prisma.CourseOfferingSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the CourseOffering
-   */
-  omit?: Prisma.CourseOfferingOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.CourseOfferingInclude<ExtArgs> | null
-  where?: Prisma.CourseOfferingWhereInput
-  orderBy?: Prisma.CourseOfferingOrderByWithRelationInput | Prisma.CourseOfferingOrderByWithRelationInput[]
-  cursor?: Prisma.CourseOfferingWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.CourseOfferingScalarFieldEnum | Prisma.CourseOfferingScalarFieldEnum[]
-}
-
-/**
  * User.enrollments
  */
 export type User$enrollmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2227,9 +2254,33 @@ export type User$enrollmentsArgs<ExtArgs extends runtime.Types.Extensions.Intern
 }
 
 /**
- * User.attendanceSessions
+ * User.taughtOfferings
  */
-export type User$attendanceSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$taughtOfferingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CourseOffering
+   */
+  select?: Prisma.CourseOfferingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CourseOffering
+   */
+  omit?: Prisma.CourseOfferingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CourseOfferingInclude<ExtArgs> | null
+  where?: Prisma.CourseOfferingWhereInput
+  orderBy?: Prisma.CourseOfferingOrderByWithRelationInput | Prisma.CourseOfferingOrderByWithRelationInput[]
+  cursor?: Prisma.CourseOfferingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CourseOfferingScalarFieldEnum | Prisma.CourseOfferingScalarFieldEnum[]
+}
+
+/**
+ * User.startedSessions
+ */
+export type User$startedSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the AttendanceSession
    */

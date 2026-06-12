@@ -361,7 +361,7 @@ export type AttendanceSessionCreateInput = {
   endTime?: Date | string | null
   createdAt?: Date | string
   courseOffering: Prisma.CourseOfferingCreateNestedOneWithoutSessionsInput
-  startedBy: Prisma.UserCreateNestedOneWithoutAttendanceSessionsInput
+  startedBy: Prisma.UserCreateNestedOneWithoutStartedSessionsInput
   records?: Prisma.AttendanceRecordCreateNestedManyWithoutAttendanceSessionInput
 }
 
@@ -391,7 +391,7 @@ export type AttendanceSessionUpdateInput = {
   endTime?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   courseOffering?: Prisma.CourseOfferingUpdateOneRequiredWithoutSessionsNestedInput
-  startedBy?: Prisma.UserUpdateOneRequiredWithoutAttendanceSessionsNestedInput
+  startedBy?: Prisma.UserUpdateOneRequiredWithoutStartedSessionsNestedInput
   records?: Prisma.AttendanceRecordUpdateManyWithoutAttendanceSessionNestedInput
 }
 
@@ -714,7 +714,7 @@ export type AttendanceSessionCreateWithoutCourseOfferingInput = {
   startTime: Date | string
   endTime?: Date | string | null
   createdAt?: Date | string
-  startedBy: Prisma.UserCreateNestedOneWithoutAttendanceSessionsInput
+  startedBy: Prisma.UserCreateNestedOneWithoutStartedSessionsInput
   records?: Prisma.AttendanceRecordCreateNestedManyWithoutAttendanceSessionInput
 }
 
@@ -769,7 +769,7 @@ export type AttendanceSessionCreateWithoutRecordsInput = {
   endTime?: Date | string | null
   createdAt?: Date | string
   courseOffering: Prisma.CourseOfferingCreateNestedOneWithoutSessionsInput
-  startedBy: Prisma.UserCreateNestedOneWithoutAttendanceSessionsInput
+  startedBy: Prisma.UserCreateNestedOneWithoutStartedSessionsInput
 }
 
 export type AttendanceSessionUncheckedCreateWithoutRecordsInput = {
@@ -813,7 +813,7 @@ export type AttendanceSessionUpdateWithoutRecordsInput = {
   endTime?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   courseOffering?: Prisma.CourseOfferingUpdateOneRequiredWithoutSessionsNestedInput
-  startedBy?: Prisma.UserUpdateOneRequiredWithoutAttendanceSessionsNestedInput
+  startedBy?: Prisma.UserUpdateOneRequiredWithoutStartedSessionsNestedInput
 }
 
 export type AttendanceSessionUncheckedUpdateWithoutRecordsInput = {
@@ -907,7 +907,7 @@ export type AttendanceSessionUpdateWithoutCourseOfferingInput = {
   startTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endTime?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  startedBy?: Prisma.UserUpdateOneRequiredWithoutAttendanceSessionsNestedInput
+  startedBy?: Prisma.UserUpdateOneRequiredWithoutStartedSessionsNestedInput
   records?: Prisma.AttendanceRecordUpdateManyWithoutAttendanceSessionNestedInput
 }
 
