@@ -243,7 +243,7 @@ export type AcademicGroupOrderByWithRelationInput = {
 
 export type AcademicGroupWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  departmentId_id?: Prisma.AcademicGroupDepartmentIdIdCompoundUniqueInput
+  departmentId_level_name?: Prisma.AcademicGroupDepartmentIdLevelNameCompoundUniqueInput
   AND?: Prisma.AcademicGroupWhereInput | Prisma.AcademicGroupWhereInput[]
   OR?: Prisma.AcademicGroupWhereInput[]
   NOT?: Prisma.AcademicGroupWhereInput | Prisma.AcademicGroupWhereInput[]
@@ -255,7 +255,7 @@ export type AcademicGroupWhereUniqueInput = Prisma.AtLeast<{
   department?: Prisma.XOR<Prisma.DepartmentScalarRelationFilter, Prisma.DepartmentWhereInput>
   students?: Prisma.UserListRelationFilter
   offerings?: Prisma.CourseOfferingListRelationFilter
-}, "id" | "departmentId_id">
+}, "id" | "departmentId_level_name">
 
 export type AcademicGroupOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -363,9 +363,10 @@ export type AcademicGroupOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
-export type AcademicGroupDepartmentIdIdCompoundUniqueInput = {
+export type AcademicGroupDepartmentIdLevelNameCompoundUniqueInput = {
   departmentId: string
-  id: string
+  level: number
+  name: string
 }
 
 export type AcademicGroupCountOrderByAggregateInput = {
