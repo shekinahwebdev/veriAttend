@@ -1,0 +1,12 @@
+insert into Department (id, name, code, institutionId) values ('9a3cc140-d34a-4a19-abd0-c4064a30f926', 'Faculty of Computing', 'FOC', 'acf6ac37-9ed9-42ae-b0ac-6b63d431dd95');
+insert into Department (id, name, code, institutionId) values ('30dbfe8f-c848-4f6f-bb38-fbc4ec178c7a', 'Business School', 'UGBS', '796be26e-cb13-417d-8d02-be8bf5fda614');
+insert into Department (id, name, code, institutionId) values ('8055a3dd-2092-4bea-b5c9-ec90aa99c1a2', 'Department of Engineering', 'ENG', 'b322c1f3-5ec9-4372-83d3-fae31eb3fc61');
+insert into Department (id, name, code, institutionId) values ('f73ffec6-fef2-4db4-b406-bff9cdc47b60', 'Faculty of Law', 'LAW', '9a929d50-36fc-4a44-a23c-208866d3ef20');
+insert into Department (id, name, code, institutionId) values ('9036fd38-dda0-4738-9802-ebb84c020b42', 'School of Nursing', 'NURS', 'd49f3b1b-cb4b-41b2-b437-00bbb5084bac');
+insert into Department (id, name, code, institutionId) values ('bca8204c-1ee1-42a3-89d5-5302a5c8fccd', 'Department of Informatics', 'INFO', '71852238-3543-4fb8-beca-12d12964b053');
+insert into Department (id, name, code, institutionId) values ('6ee74895-4bbf-48bb-b7d6-7b955c8f4b0c', 'Faculty of Pharmacy', 'PHARM', 'acf6ac37-9ed9-42ae-b0ac-6b63d431dd95');
+insert into Department (id, name, code, institutionId) values ('4c4b4fdd-bf7a-48bf-a115-da4b2bc83f08', 'Department of Mathematics', 'MATH', '796be26e-cb13-417d-8d02-be8bf5fda614');
+insert into Department (id, name, code, institutionId) values ('6298f154-6f21-440d-a32c-6aba59ce9cbb', 'Faculty of Art', 'ART', 'b322c1f3-5ec9-4372-83d3-fae31eb3fc61');
+insert into Department (id, name, code, institutionId) values ('d4a75075-8c59-44a6-878a-3aafc4b635f5', 'School of Public Health', 'SPH', '9a929d50-36fc-4a44-a23c-208866d3ef20');
+insert into Department (id, name, code, institutionId) values ('cf758a6b-3c57-49fa-b89b-71db63b2bbb1', 'Department of Economics', 'ECON', 'd49f3b1b-cb4b-41b2-b437-00bbb5084bac');
+insert into Department (id, name, code, institutionId) values ('d5186af8-1118-4386-8aad-e3b8425d8d9e', 'Faculty of Social Sciences', 'SOC', '71852238-3543-4fb8-beca-12d12964b053');

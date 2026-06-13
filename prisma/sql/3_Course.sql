@@ -1,0 +1,25 @@
+
+insert into Course (id, courseCode, courseName, creditHours, departmentId) values ('41b1dd08-594f-4ed5-b092-73b02f2182d1', 'CS101', 'Introduction to Computing', 3, '9a3cc140-d34a-4a19-abd0-c4064a30f926');
+insert into Course (id, courseCode, courseName, creditHours, departmentId) values ('73769d32-3e21-46d1-bf19-93c3c8fc8475', 'IT103', 'Computer Hardware', 2, '30dbfe8f-c848-4f6f-bb38-fbc4ec178c7a');
+insert into Course (id, courseCode, courseName, creditHours, departmentId) values ('011d0c85-894c-4801-9574-f43c59c3ead4', 'CS201', 'Data Structures', 2, '8055a3dd-2092-4bea-b5c9-ec90aa99c1a2');
+insert into Course (id, courseCode, courseName, creditHours, departmentId) values ('3e9151d1-f3e6-4d80-89ef-64b617e523d2', 'IT202', 'Web Development', 2, 'f73ffec6-fef2-4db4-b406-bff9cdc47b60');
+insert into Course (id, courseCode, courseName, creditHours, departmentId) values ('5c881bba-2261-4c4e-9743-08d069b9e458', 'CS301', 'Database Management Systems', 3, '9036fd38-dda0-4738-9802-ebb84c020b42');
+insert into Course (id, courseCode, courseName, creditHours, departmentId) values ('49e460dc-bcfe-4ff0-8f8a-831e69ade2d8', 'IT305', 'Network Engineering', 2, 'bca8204c-1ee1-42a3-89d5-5302a5c8fccd');
+insert into Course (id, courseCode, courseName, creditHours, departmentId) values ('ba5a3176-d856-4363-bb47-55633b1c8b5c', 'CS401', 'Software Engineering', 2, '6ee74895-4bbf-48bb-b7d6-7b955c8f4b0c');
+insert into Course (id, courseCode, courseName, creditHours, departmentId) values ('e198cb05-b8e6-4e88-a3a7-a2e52330c865', 'IT402', 'Artificial Intelligence', 2, '4c4b4fdd-bf7a-48bf-a115-da4b2bc83f08');
+insert into Course (id, courseCode, courseName, creditHours, departmentId) values ('6fd67ab2-a7ad-4005-8cc9-ec68a29c4e8c', 'BA101', 'Principles of Management', 3, '6298f154-6f21-440d-a32c-6aba59ce9cbb');
+insert into Course (id, courseCode, courseName, creditHours, departmentId) values ('09f3bb0a-0dc8-4e75-b57b-050134d49719', 'EC102', 'Microeconomics', 3, 'd4a75075-8c59-44a6-878a-3aafc4b635f5');
+insert into Course (id, courseCode, courseName, creditHours, departmentId) values ('5e38335e-f17d-46f4-8c53-710d034ded5e', 'BA201', 'Organizational Behaviour', 3, 'cf758a6b-3c57-49fa-b89b-71db63b2bbb1');
+insert into Course (id, courseCode, courseName, creditHours, departmentId) values ('b6dc28f2-90f3-4701-b30f-9e0bc17b4f09', 'EC202', 'Macroeconomics', 2, 'd5186af8-1118-4386-8aad-e3b8425d8d9e');
+insert into Course (id, courseCode, courseName, creditHours, departmentId) values ('f44a8f08-e280-4b9d-8359-c44140ac455e', 'BA301', 'Corporate Finance', 3, '9a3cc140-d34a-4a19-abd0-c4064a30f926');
+insert into Course (id, courseCode, courseName, creditHours, departmentId) values ('7f828da3-1905-4175-b61e-028baa89be9c', 'EC303', 'Econometrics', 3, '30dbfe8f-c848-4f6f-bb38-fbc4ec178c7a');
+insert into Course (id, courseCode, courseName, creditHours, departmentId) values ('546654e9-e76a-4074-9c6c-6ac394457e6e', 'BA401', 'Strategic Management', 3, '8055a3dd-2092-4bea-b5c9-ec90aa99c1a2');
+insert into Course (id, courseCode, courseName, creditHours, departmentId) values ('65696c38-00ed-4257-bfb7-c4b367043f88', 'EC402', 'International Trade', 2, 'f73ffec6-fef2-4db4-b406-bff9cdc47b60');
+insert into Course (id, courseCode, courseName, creditHours, departmentId) values ('b91119a9-665c-4374-9e64-137cbae833b2', 'EN101', 'Introduction to Engineering', 2, '9036fd38-dda0-4738-9802-ebb84c020b42');
+insert into Course (id, courseCode, courseName, creditHours, departmentId) values ('d39015f4-3d87-4a3d-bfbe-f25aeff58871', 'EN102', 'Engineering Graphics', 3, 'bca8204c-1ee1-42a3-89d5-5302a5c8fccd');
+insert into Course (id, courseCode, courseName, creditHours, departmentId) values ('3dd14b74-9b60-47b2-803d-a5ba0f81f43b', 'EN201', 'Circuit Theory', 3, '6ee74895-4bbf-48bb-b7d6-7b955c8f4b0c');
+insert into Course (id, courseCode, courseName, creditHours, departmentId) values ('3a7d3cae-e676-4597-8c7e-ea9c86ae7291', 'EN202', 'Thermodynamics', 3, '4c4b4fdd-bf7a-48bf-a115-da4b2bc83f08');
+insert into Course (id, courseCode, courseName, creditHours, departmentId) values ('f9383367-c540-4843-bbe9-90b1abae9fde', 'EN301', 'Digital Signal Processing', 2, '6298f154-6f21-440d-a32c-6aba59ce9cbb');
+insert into Course (id, courseCode, courseName, creditHours, departmentId) values ('4625c945-b3b0-4a82-8b52-fa07ca27c538', 'EN302', 'Fluid Mechanics', 3, 'd4a75075-8c59-44a6-878a-3aafc4b635f5');
+insert into Course (id, courseCode, courseName, creditHours, departmentId) values ('dcfe9834-a730-46a0-a5ee-616fcdc8d4c8', 'EN401', 'Control Systems', 2, 'cf758a6b-3c57-49fa-b89b-71db63b2bbb1');
+insert into Course (id, courseCode, courseName, creditHours, departmentId) values ('5b0814b3-d3a8-43cf-b6d4-50ce480cc431', 'EN402', 'Capstone Design Project', 3, 'd5186af8-1118-4386-8aad-e3b8425d8d9e');
