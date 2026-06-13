@@ -208,7 +208,47 @@ export default function SignUpPage() {
         {urlRole === "student" && (
           <div className="space-y-1.5 animate-fade-in">
             <label
-              htmlFor="studentId"
+              htmlFor="institutionId"
+              className="text-xs font-semibold uppercase tracking-wider text-muted-foreground"
+            >
+              Institution
+            </label>
+            <input
+              id="institutionId"
+              name="institutionId"
+              type="text"
+              required
+              disabled={isPending}
+              placeholder="A or B"
+              className="w-full px-4 py-2.5 rounded-xl border border-border/80 bg-card focus:outline-hidden focus:ring-2 focus:ring-primary/20 focus:border-primary disabled:opacity-50 text-sm transition-all"
+            />
+          </div>
+        )}
+
+        {urlRole === "student" && (
+          <div className="space-y-1.5 animate-fade-in">
+            <label
+              htmlFor="departmentId"
+              className="text-xs font-semibold uppercase tracking-wider text-muted-foreground"
+            >
+              Department
+            </label>
+            <input
+              id="departmentId"
+              name="departmentId"
+              type="text"
+              required
+              disabled={isPending}
+              placeholder="A or B"
+              className="w-full px-4 py-2.5 rounded-xl border border-border/80 bg-card focus:outline-hidden focus:ring-2 focus:ring-primary/20 focus:border-primary disabled:opacity-50 text-sm transition-all"
+            />
+          </div>
+        )}
+
+        {urlRole === "student" && (
+          <div className="space-y-1.5 animate-fade-in">
+            <label
+              htmlFor="academicGroup"
               className="text-xs font-semibold uppercase tracking-wider text-muted-foreground"
             >
               Student Group
@@ -224,27 +264,6 @@ export default function SignUpPage() {
             />
           </div>
         )}
-
-        {urlRole === "student" && (
-          <div className="space-y-1.5 animate-fade-in">
-            <label
-              htmlFor="studentId"
-              className="text-xs font-semibold uppercase tracking-wider text-muted-foreground"
-            >
-              Institution
-            </label>
-            <input
-              id="academnicGroup"
-              name="academnicGroup"
-              type="text"
-              required
-              disabled={isPending}
-              placeholder="A or B"
-              className="w-full px-4 py-2.5 rounded-xl border border-border/80 bg-card focus:outline-hidden focus:ring-2 focus:ring-primary/20 focus:border-primary disabled:opacity-50 text-sm transition-all"
-            />
-          </div>
-        )}
-
         <button
           type="submit"
           disabled={isPending}

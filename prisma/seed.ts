@@ -3,40 +3,49 @@ import fs from "fs";
 import path from "path";
 
 const main = async () => {
-  // Locate file path
-  const sqlPath = path.join(
-    __dirname,
-    "sql",
-    "1_Instituition.sql",
+  // List of all files in order of database dependency
+  const sqlFiles = [
+    "1_Institution.sql",
     "2_Department.sql",
     "3_Course.sql",
     "4_AcademicGroup.sql",
-  );
+  ];
 
-  // read raw sql string data
-  const sqlData = fs.readFileSync(sqlPath, "utf8");
+  for (const file of sqlFiles) {
+    // Locate file path
+    const sqlPath = path.join(process.cwd(), "prisma", "sql", file);
 
-  // clean up the content
-  const sqlStatements = sqlData
-    .split(";")
-    .map((statement) => statement.trim())
-    .filter((statement) => statement.length > 0);
+    // read raw sql string data
+    const sqlData = fs.readFileSync(sqlPath, "utf8");
 
-  console.log(
-    `Starting execution of ${sqlStatements.length} SQL statements...`,
-  );
+    // clean up the content
+    const sqlStatements = sqlData
+      .split(";")
+      .map((statement) => statement.trim())
+      .filter((statement) => statement.length > 0);
 
-  // Running each statement
-  for (const statement of sqlStatements) {
-    try {
-      await prisma.$executeRawUnsafe(`${statement}`);
-    } catch (error) {
-      console.error(`Failed to execute: ${statement}`);
-      console.error(error);
-      process.exit(1);
+    console.log(
+      `Starting execution of ${sqlStatements.length} SQL statements...`,
+    );
+
+    // Running each statement
+    for (const statement of sqlStatements) {
+      try {
+        // fixing case-sensitivity in prisma
+        const fixedStatement = statement
+          .replace(/insert into Institution/g, 'insert into "Institution"')
+          .replace(/insert into Department/g, 'insert into "Department"')
+          .replace(/insert into Course/g, 'insert into "Course"')
+          .replace(/insert into AcademicGroup/g, 'insert into "AcademicGroup"');
+
+        await prisma.$executeRawUnsafe(`${fixedStatement}`);
+      } catch (error) {
+        console.error(`Failed to execute: ${statement}`);
+        console.error(error);
+        process.exit(1);
+      }
     }
   }
-
   console.log("Seeding completed successfully..");
 };
 
