@@ -34,8 +34,8 @@ model Department {
   institutionId String
   institution   Institution @relation(fields: [institutionId], references: [id])
 
+  programs      Program[]
   groups  AcademicGroup[]
-  courses Course[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -43,14 +43,34 @@ model Department {
   @@unique([institutionId, code])
 }
 
+model Program {
+  id           String        @id @default(uuid())
+  name         String        // e.g., "BSc Computer Science"
+  shortName    String?        // e.g., "BSCCS"
+  
+  departmentId String
+  department   Department    @relation(fields: [departmentId], references: [id])
+
+  courses      Course[]
+  groups       AcademicGroup[] // Academic groups (cohorts) now belong to the program!
+
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+
+
 model AcademicGroup {
   id String @id @default(uuid())
 
   name  String
   level Int
 
-  departmentId String
-  department   Department @relation(fields: [departmentId], references: [id])
+  programId    String
+  program      Program         @relation(fields: [programId], references: [id])
+
+  departmentId String?
+  department   Department?      @relation(fields: [departmentId], references: [id])
 
   students  User[]
   offerings CourseOffering[]
@@ -58,7 +78,7 @@ model AcademicGroup {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@unique([departmentId, level, name])
+  @@unique([programId, level, name])
 }
 
 enum Role {
@@ -108,21 +128,22 @@ model User {
   updatedAt DateTime @updatedAt
 }
 
+
+
 model Course {
-  id String @id @default(uuid())
-
-  courseCode String @unique
-  courseName String
-
+  id          String           @id @default(uuid())
+  courseCode  String           @unique
+  courseName  String
   creditHours Int?
 
-  departmentId String
-  department   Department @relation(fields: [departmentId], references: [id])
+  programId   String
+  program     Program          @relation(fields: [programId], references: [id])
 
-  offerings CourseOffering[]
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  offerings   CourseOffering[]
+
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
 }
 
 model CourseOffering {
