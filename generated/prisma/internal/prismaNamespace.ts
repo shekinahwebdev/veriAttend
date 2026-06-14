@@ -386,6 +386,7 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 export const ModelName = {
   Institution: 'Institution',
   Department: 'Department',
+  Program: 'Program',
   AcademicGroup: 'AcademicGroup',
   User: 'User',
   Course: 'Course',
@@ -408,7 +409,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "institution" | "department" | "academicGroup" | "user" | "course" | "courseOffering" | "enrollment" | "attendanceSession" | "attendanceRecord"
+    modelProps: "institution" | "department" | "program" | "academicGroup" | "user" | "course" | "courseOffering" | "enrollment" | "attendanceSession" | "attendanceRecord"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -557,6 +558,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.DepartmentCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.DepartmentCountAggregateOutputType> | number
+        }
+      }
+    }
+    Program: {
+      payload: Prisma.$ProgramPayload<ExtArgs>
+      fields: Prisma.ProgramFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ProgramFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgramPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ProgramFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgramPayload>
+        }
+        findFirst: {
+          args: Prisma.ProgramFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgramPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ProgramFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgramPayload>
+        }
+        findMany: {
+          args: Prisma.ProgramFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgramPayload>[]
+        }
+        create: {
+          args: Prisma.ProgramCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgramPayload>
+        }
+        createMany: {
+          args: Prisma.ProgramCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ProgramCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgramPayload>[]
+        }
+        delete: {
+          args: Prisma.ProgramDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgramPayload>
+        }
+        update: {
+          args: Prisma.ProgramUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgramPayload>
+        }
+        deleteMany: {
+          args: Prisma.ProgramDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ProgramUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ProgramUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgramPayload>[]
+        }
+        upsert: {
+          args: Prisma.ProgramUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgramPayload>
+        }
+        aggregate: {
+          args: Prisma.ProgramAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateProgram>
+        }
+        groupBy: {
+          args: Prisma.ProgramGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProgramGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ProgramCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProgramCountAggregateOutputType> | number
         }
       }
     }
@@ -1141,10 +1216,23 @@ export const DepartmentScalarFieldEnum = {
 export type DepartmentScalarFieldEnum = (typeof DepartmentScalarFieldEnum)[keyof typeof DepartmentScalarFieldEnum]
 
 
+export const ProgramScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  shortName: 'shortName',
+  departmentId: 'departmentId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProgramScalarFieldEnum = (typeof ProgramScalarFieldEnum)[keyof typeof ProgramScalarFieldEnum]
+
+
 export const AcademicGroupScalarFieldEnum = {
   id: 'id',
   name: 'name',
   level: 'level',
+  programId: 'programId',
   departmentId: 'departmentId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -1178,7 +1266,7 @@ export const CourseScalarFieldEnum = {
   courseCode: 'courseCode',
   courseName: 'courseName',
   creditHours: 'creditHours',
-  departmentId: 'departmentId',
+  programId: 'programId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -1529,6 +1617,7 @@ export type PrismaClientOptions = ({
 export type GlobalOmitConfig = {
   institution?: Prisma.InstitutionOmit
   department?: Prisma.DepartmentOmit
+  program?: Prisma.ProgramOmit
   academicGroup?: Prisma.AcademicGroupOmit
   user?: Prisma.UserOmit
   course?: Prisma.CourseOmit

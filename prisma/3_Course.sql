@@ -1,4 +1,3 @@
-
 insert into Course (id, "courseCode", "courseName", "creditHours", "departmentId", "createdAt" , "updatedAt" ) values ('be4b7baf-5e5e-4eae-8811-c1056ba19853', 'CS101', 'Introduction to Computing', 2, '9a3cc140-d34a-4a19-abd0-c4064a30f926', '2025-12-06', '2025-07-08');
 insert into Course (id, "courseCode", "courseName", "creditHours", "departmentId", "createdAt" , "updatedAt" ) values ('1b5fdbc3-2737-40d9-b009-d8edb7cfe403', 'IT103', 'Computer Hardware', 2, '30dbfe8f-c848-4f6f-bb38-fbc4ec178c7a', '2025-10-14', '2026-04-04');
 insert into Course (id, "courseCode", "courseName", "creditHours", "departmentId", "createdAt" , "updatedAt" ) values ('55f6b6c2-13db-46d3-8324-fa3e38e99cb3', 'CS201', 'Data Structures', 3, '8055a3dd-2092-4bea-b5c9-ec90aa99c1a2', '2025-08-13', '2025-07-12');

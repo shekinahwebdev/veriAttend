@@ -10,6 +10,7 @@
  */
 export type * from './models/Institution'
 export type * from './models/Department'
+export type * from './models/Program'
 export type * from './models/AcademicGroup'
 export type * from './models/User'
 export type * from './models/Course'

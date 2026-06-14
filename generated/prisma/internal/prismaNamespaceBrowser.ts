@@ -53,6 +53,7 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   Institution: 'Institution',
   Department: 'Department',
+  Program: 'Program',
   AcademicGroup: 'AcademicGroup',
   User: 'User',
   Course: 'Course',
@@ -102,10 +103,23 @@ export const DepartmentScalarFieldEnum = {
 export type DepartmentScalarFieldEnum = (typeof DepartmentScalarFieldEnum)[keyof typeof DepartmentScalarFieldEnum]
 
 
+export const ProgramScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  shortName: 'shortName',
+  departmentId: 'departmentId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProgramScalarFieldEnum = (typeof ProgramScalarFieldEnum)[keyof typeof ProgramScalarFieldEnum]
+
+
 export const AcademicGroupScalarFieldEnum = {
   id: 'id',
   name: 'name',
   level: 'level',
+  programId: 'programId',
   departmentId: 'departmentId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -139,7 +153,7 @@ export const CourseScalarFieldEnum = {
   courseCode: 'courseCode',
   courseName: 'courseName',
   creditHours: 'creditHours',
-  departmentId: 'departmentId',
+  programId: 'programId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

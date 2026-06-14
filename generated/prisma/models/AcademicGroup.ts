@@ -38,6 +38,7 @@ export type AcademicGroupMinAggregateOutputType = {
   id: string | null
   name: string | null
   level: number | null
+  programId: string | null
   departmentId: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -47,6 +48,7 @@ export type AcademicGroupMaxAggregateOutputType = {
   id: string | null
   name: string | null
   level: number | null
+  programId: string | null
   departmentId: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -56,6 +58,7 @@ export type AcademicGroupCountAggregateOutputType = {
   id: number
   name: number
   level: number
+  programId: number
   departmentId: number
   createdAt: number
   updatedAt: number
@@ -75,6 +78,7 @@ export type AcademicGroupMinAggregateInputType = {
   id?: true
   name?: true
   level?: true
+  programId?: true
   departmentId?: true
   createdAt?: true
   updatedAt?: true
@@ -84,6 +88,7 @@ export type AcademicGroupMaxAggregateInputType = {
   id?: true
   name?: true
   level?: true
+  programId?: true
   departmentId?: true
   createdAt?: true
   updatedAt?: true
@@ -93,6 +98,7 @@ export type AcademicGroupCountAggregateInputType = {
   id?: true
   name?: true
   level?: true
+  programId?: true
   departmentId?: true
   createdAt?: true
   updatedAt?: true
@@ -189,7 +195,8 @@ export type AcademicGroupGroupByOutputType = {
   id: string
   name: string
   level: number
-  departmentId: string
+  programId: string
+  departmentId: string | null
   createdAt: Date
   updatedAt: Date
   _count: AcademicGroupCountAggregateOutputType | null
@@ -221,10 +228,12 @@ export type AcademicGroupWhereInput = {
   id?: Prisma.StringFilter<"AcademicGroup"> | string
   name?: Prisma.StringFilter<"AcademicGroup"> | string
   level?: Prisma.IntFilter<"AcademicGroup"> | number
-  departmentId?: Prisma.StringFilter<"AcademicGroup"> | string
+  programId?: Prisma.StringFilter<"AcademicGroup"> | string
+  departmentId?: Prisma.StringNullableFilter<"AcademicGroup"> | string | null
   createdAt?: Prisma.DateTimeFilter<"AcademicGroup"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"AcademicGroup"> | Date | string
-  department?: Prisma.XOR<Prisma.DepartmentScalarRelationFilter, Prisma.DepartmentWhereInput>
+  program?: Prisma.XOR<Prisma.ProgramScalarRelationFilter, Prisma.ProgramWhereInput>
+  department?: Prisma.XOR<Prisma.DepartmentNullableScalarRelationFilter, Prisma.DepartmentWhereInput> | null
   students?: Prisma.UserListRelationFilter
   offerings?: Prisma.CourseOfferingListRelationFilter
 }
@@ -233,9 +242,11 @@ export type AcademicGroupOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   level?: Prisma.SortOrder
-  departmentId?: Prisma.SortOrder
+  programId?: Prisma.SortOrder
+  departmentId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  program?: Prisma.ProgramOrderByWithRelationInput
   department?: Prisma.DepartmentOrderByWithRelationInput
   students?: Prisma.UserOrderByRelationAggregateInput
   offerings?: Prisma.CourseOfferingOrderByRelationAggregateInput
@@ -243,25 +254,28 @@ export type AcademicGroupOrderByWithRelationInput = {
 
 export type AcademicGroupWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  departmentId_level_name?: Prisma.AcademicGroupDepartmentIdLevelNameCompoundUniqueInput
+  programId_level_name?: Prisma.AcademicGroupProgramIdLevelNameCompoundUniqueInput
   AND?: Prisma.AcademicGroupWhereInput | Prisma.AcademicGroupWhereInput[]
   OR?: Prisma.AcademicGroupWhereInput[]
   NOT?: Prisma.AcademicGroupWhereInput | Prisma.AcademicGroupWhereInput[]
   name?: Prisma.StringFilter<"AcademicGroup"> | string
   level?: Prisma.IntFilter<"AcademicGroup"> | number
-  departmentId?: Prisma.StringFilter<"AcademicGroup"> | string
+  programId?: Prisma.StringFilter<"AcademicGroup"> | string
+  departmentId?: Prisma.StringNullableFilter<"AcademicGroup"> | string | null
   createdAt?: Prisma.DateTimeFilter<"AcademicGroup"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"AcademicGroup"> | Date | string
-  department?: Prisma.XOR<Prisma.DepartmentScalarRelationFilter, Prisma.DepartmentWhereInput>
+  program?: Prisma.XOR<Prisma.ProgramScalarRelationFilter, Prisma.ProgramWhereInput>
+  department?: Prisma.XOR<Prisma.DepartmentNullableScalarRelationFilter, Prisma.DepartmentWhereInput> | null
   students?: Prisma.UserListRelationFilter
   offerings?: Prisma.CourseOfferingListRelationFilter
-}, "id" | "departmentId_level_name">
+}, "id" | "programId_level_name">
 
 export type AcademicGroupOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   level?: Prisma.SortOrder
-  departmentId?: Prisma.SortOrder
+  programId?: Prisma.SortOrder
+  departmentId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.AcademicGroupCountOrderByAggregateInput
@@ -278,7 +292,8 @@ export type AcademicGroupScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"AcademicGroup"> | string
   name?: Prisma.StringWithAggregatesFilter<"AcademicGroup"> | string
   level?: Prisma.IntWithAggregatesFilter<"AcademicGroup"> | number
-  departmentId?: Prisma.StringWithAggregatesFilter<"AcademicGroup"> | string
+  programId?: Prisma.StringWithAggregatesFilter<"AcademicGroup"> | string
+  departmentId?: Prisma.StringNullableWithAggregatesFilter<"AcademicGroup"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"AcademicGroup"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"AcademicGroup"> | Date | string
 }
@@ -289,7 +304,8 @@ export type AcademicGroupCreateInput = {
   level: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  department: Prisma.DepartmentCreateNestedOneWithoutGroupsInput
+  program: Prisma.ProgramCreateNestedOneWithoutGroupsInput
+  department?: Prisma.DepartmentCreateNestedOneWithoutGroupsInput
   students?: Prisma.UserCreateNestedManyWithoutAcademicGroupInput
   offerings?: Prisma.CourseOfferingCreateNestedManyWithoutAcademicGroupInput
 }
@@ -298,7 +314,8 @@ export type AcademicGroupUncheckedCreateInput = {
   id?: string
   name: string
   level: number
-  departmentId: string
+  programId: string
+  departmentId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   students?: Prisma.UserUncheckedCreateNestedManyWithoutAcademicGroupInput
@@ -311,7 +328,8 @@ export type AcademicGroupUpdateInput = {
   level?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  department?: Prisma.DepartmentUpdateOneRequiredWithoutGroupsNestedInput
+  program?: Prisma.ProgramUpdateOneRequiredWithoutGroupsNestedInput
+  department?: Prisma.DepartmentUpdateOneWithoutGroupsNestedInput
   students?: Prisma.UserUpdateManyWithoutAcademicGroupNestedInput
   offerings?: Prisma.CourseOfferingUpdateManyWithoutAcademicGroupNestedInput
 }
@@ -320,7 +338,8 @@ export type AcademicGroupUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   level?: Prisma.IntFieldUpdateOperationsInput | number
-  departmentId?: Prisma.StringFieldUpdateOperationsInput | string
+  programId?: Prisma.StringFieldUpdateOperationsInput | string
+  departmentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   students?: Prisma.UserUncheckedUpdateManyWithoutAcademicGroupNestedInput
@@ -331,7 +350,8 @@ export type AcademicGroupCreateManyInput = {
   id?: string
   name: string
   level: number
-  departmentId: string
+  programId: string
+  departmentId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -348,7 +368,8 @@ export type AcademicGroupUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   level?: Prisma.IntFieldUpdateOperationsInput | number
-  departmentId?: Prisma.StringFieldUpdateOperationsInput | string
+  programId?: Prisma.StringFieldUpdateOperationsInput | string
+  departmentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -363,8 +384,8 @@ export type AcademicGroupOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
-export type AcademicGroupDepartmentIdLevelNameCompoundUniqueInput = {
-  departmentId: string
+export type AcademicGroupProgramIdLevelNameCompoundUniqueInput = {
+  programId: string
   level: number
   name: string
 }
@@ -373,6 +394,7 @@ export type AcademicGroupCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   level?: Prisma.SortOrder
+  programId?: Prisma.SortOrder
   departmentId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -386,6 +408,7 @@ export type AcademicGroupMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   level?: Prisma.SortOrder
+  programId?: Prisma.SortOrder
   departmentId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -395,6 +418,7 @@ export type AcademicGroupMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   level?: Prisma.SortOrder
+  programId?: Prisma.SortOrder
   departmentId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -456,6 +480,48 @@ export type AcademicGroupUncheckedUpdateManyWithoutDepartmentNestedInput = {
   deleteMany?: Prisma.AcademicGroupScalarWhereInput | Prisma.AcademicGroupScalarWhereInput[]
 }
 
+export type AcademicGroupCreateNestedManyWithoutProgramInput = {
+  create?: Prisma.XOR<Prisma.AcademicGroupCreateWithoutProgramInput, Prisma.AcademicGroupUncheckedCreateWithoutProgramInput> | Prisma.AcademicGroupCreateWithoutProgramInput[] | Prisma.AcademicGroupUncheckedCreateWithoutProgramInput[]
+  connectOrCreate?: Prisma.AcademicGroupCreateOrConnectWithoutProgramInput | Prisma.AcademicGroupCreateOrConnectWithoutProgramInput[]
+  createMany?: Prisma.AcademicGroupCreateManyProgramInputEnvelope
+  connect?: Prisma.AcademicGroupWhereUniqueInput | Prisma.AcademicGroupWhereUniqueInput[]
+}
+
+export type AcademicGroupUncheckedCreateNestedManyWithoutProgramInput = {
+  create?: Prisma.XOR<Prisma.AcademicGroupCreateWithoutProgramInput, Prisma.AcademicGroupUncheckedCreateWithoutProgramInput> | Prisma.AcademicGroupCreateWithoutProgramInput[] | Prisma.AcademicGroupUncheckedCreateWithoutProgramInput[]
+  connectOrCreate?: Prisma.AcademicGroupCreateOrConnectWithoutProgramInput | Prisma.AcademicGroupCreateOrConnectWithoutProgramInput[]
+  createMany?: Prisma.AcademicGroupCreateManyProgramInputEnvelope
+  connect?: Prisma.AcademicGroupWhereUniqueInput | Prisma.AcademicGroupWhereUniqueInput[]
+}
+
+export type AcademicGroupUpdateManyWithoutProgramNestedInput = {
+  create?: Prisma.XOR<Prisma.AcademicGroupCreateWithoutProgramInput, Prisma.AcademicGroupUncheckedCreateWithoutProgramInput> | Prisma.AcademicGroupCreateWithoutProgramInput[] | Prisma.AcademicGroupUncheckedCreateWithoutProgramInput[]
+  connectOrCreate?: Prisma.AcademicGroupCreateOrConnectWithoutProgramInput | Prisma.AcademicGroupCreateOrConnectWithoutProgramInput[]
+  upsert?: Prisma.AcademicGroupUpsertWithWhereUniqueWithoutProgramInput | Prisma.AcademicGroupUpsertWithWhereUniqueWithoutProgramInput[]
+  createMany?: Prisma.AcademicGroupCreateManyProgramInputEnvelope
+  set?: Prisma.AcademicGroupWhereUniqueInput | Prisma.AcademicGroupWhereUniqueInput[]
+  disconnect?: Prisma.AcademicGroupWhereUniqueInput | Prisma.AcademicGroupWhereUniqueInput[]
+  delete?: Prisma.AcademicGroupWhereUniqueInput | Prisma.AcademicGroupWhereUniqueInput[]
+  connect?: Prisma.AcademicGroupWhereUniqueInput | Prisma.AcademicGroupWhereUniqueInput[]
+  update?: Prisma.AcademicGroupUpdateWithWhereUniqueWithoutProgramInput | Prisma.AcademicGroupUpdateWithWhereUniqueWithoutProgramInput[]
+  updateMany?: Prisma.AcademicGroupUpdateManyWithWhereWithoutProgramInput | Prisma.AcademicGroupUpdateManyWithWhereWithoutProgramInput[]
+  deleteMany?: Prisma.AcademicGroupScalarWhereInput | Prisma.AcademicGroupScalarWhereInput[]
+}
+
+export type AcademicGroupUncheckedUpdateManyWithoutProgramNestedInput = {
+  create?: Prisma.XOR<Prisma.AcademicGroupCreateWithoutProgramInput, Prisma.AcademicGroupUncheckedCreateWithoutProgramInput> | Prisma.AcademicGroupCreateWithoutProgramInput[] | Prisma.AcademicGroupUncheckedCreateWithoutProgramInput[]
+  connectOrCreate?: Prisma.AcademicGroupCreateOrConnectWithoutProgramInput | Prisma.AcademicGroupCreateOrConnectWithoutProgramInput[]
+  upsert?: Prisma.AcademicGroupUpsertWithWhereUniqueWithoutProgramInput | Prisma.AcademicGroupUpsertWithWhereUniqueWithoutProgramInput[]
+  createMany?: Prisma.AcademicGroupCreateManyProgramInputEnvelope
+  set?: Prisma.AcademicGroupWhereUniqueInput | Prisma.AcademicGroupWhereUniqueInput[]
+  disconnect?: Prisma.AcademicGroupWhereUniqueInput | Prisma.AcademicGroupWhereUniqueInput[]
+  delete?: Prisma.AcademicGroupWhereUniqueInput | Prisma.AcademicGroupWhereUniqueInput[]
+  connect?: Prisma.AcademicGroupWhereUniqueInput | Prisma.AcademicGroupWhereUniqueInput[]
+  update?: Prisma.AcademicGroupUpdateWithWhereUniqueWithoutProgramInput | Prisma.AcademicGroupUpdateWithWhereUniqueWithoutProgramInput[]
+  updateMany?: Prisma.AcademicGroupUpdateManyWithWhereWithoutProgramInput | Prisma.AcademicGroupUpdateManyWithWhereWithoutProgramInput[]
+  deleteMany?: Prisma.AcademicGroupScalarWhereInput | Prisma.AcademicGroupScalarWhereInput[]
+}
+
 export type IntFieldUpdateOperationsInput = {
   set?: number
   increment?: number
@@ -500,6 +566,7 @@ export type AcademicGroupCreateWithoutDepartmentInput = {
   level: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  program: Prisma.ProgramCreateNestedOneWithoutGroupsInput
   students?: Prisma.UserCreateNestedManyWithoutAcademicGroupInput
   offerings?: Prisma.CourseOfferingCreateNestedManyWithoutAcademicGroupInput
 }
@@ -508,6 +575,7 @@ export type AcademicGroupUncheckedCreateWithoutDepartmentInput = {
   id?: string
   name: string
   level: number
+  programId: string
   createdAt?: Date | string
   updatedAt?: Date | string
   students?: Prisma.UserUncheckedCreateNestedManyWithoutAcademicGroupInput
@@ -547,9 +615,58 @@ export type AcademicGroupScalarWhereInput = {
   id?: Prisma.StringFilter<"AcademicGroup"> | string
   name?: Prisma.StringFilter<"AcademicGroup"> | string
   level?: Prisma.IntFilter<"AcademicGroup"> | number
-  departmentId?: Prisma.StringFilter<"AcademicGroup"> | string
+  programId?: Prisma.StringFilter<"AcademicGroup"> | string
+  departmentId?: Prisma.StringNullableFilter<"AcademicGroup"> | string | null
   createdAt?: Prisma.DateTimeFilter<"AcademicGroup"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"AcademicGroup"> | Date | string
+}
+
+export type AcademicGroupCreateWithoutProgramInput = {
+  id?: string
+  name: string
+  level: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department?: Prisma.DepartmentCreateNestedOneWithoutGroupsInput
+  students?: Prisma.UserCreateNestedManyWithoutAcademicGroupInput
+  offerings?: Prisma.CourseOfferingCreateNestedManyWithoutAcademicGroupInput
+}
+
+export type AcademicGroupUncheckedCreateWithoutProgramInput = {
+  id?: string
+  name: string
+  level: number
+  departmentId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  students?: Prisma.UserUncheckedCreateNestedManyWithoutAcademicGroupInput
+  offerings?: Prisma.CourseOfferingUncheckedCreateNestedManyWithoutAcademicGroupInput
+}
+
+export type AcademicGroupCreateOrConnectWithoutProgramInput = {
+  where: Prisma.AcademicGroupWhereUniqueInput
+  create: Prisma.XOR<Prisma.AcademicGroupCreateWithoutProgramInput, Prisma.AcademicGroupUncheckedCreateWithoutProgramInput>
+}
+
+export type AcademicGroupCreateManyProgramInputEnvelope = {
+  data: Prisma.AcademicGroupCreateManyProgramInput | Prisma.AcademicGroupCreateManyProgramInput[]
+  skipDuplicates?: boolean
+}
+
+export type AcademicGroupUpsertWithWhereUniqueWithoutProgramInput = {
+  where: Prisma.AcademicGroupWhereUniqueInput
+  update: Prisma.XOR<Prisma.AcademicGroupUpdateWithoutProgramInput, Prisma.AcademicGroupUncheckedUpdateWithoutProgramInput>
+  create: Prisma.XOR<Prisma.AcademicGroupCreateWithoutProgramInput, Prisma.AcademicGroupUncheckedCreateWithoutProgramInput>
+}
+
+export type AcademicGroupUpdateWithWhereUniqueWithoutProgramInput = {
+  where: Prisma.AcademicGroupWhereUniqueInput
+  data: Prisma.XOR<Prisma.AcademicGroupUpdateWithoutProgramInput, Prisma.AcademicGroupUncheckedUpdateWithoutProgramInput>
+}
+
+export type AcademicGroupUpdateManyWithWhereWithoutProgramInput = {
+  where: Prisma.AcademicGroupScalarWhereInput
+  data: Prisma.XOR<Prisma.AcademicGroupUpdateManyMutationInput, Prisma.AcademicGroupUncheckedUpdateManyWithoutProgramInput>
 }
 
 export type AcademicGroupCreateWithoutStudentsInput = {
@@ -558,7 +675,8 @@ export type AcademicGroupCreateWithoutStudentsInput = {
   level: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  department: Prisma.DepartmentCreateNestedOneWithoutGroupsInput
+  program: Prisma.ProgramCreateNestedOneWithoutGroupsInput
+  department?: Prisma.DepartmentCreateNestedOneWithoutGroupsInput
   offerings?: Prisma.CourseOfferingCreateNestedManyWithoutAcademicGroupInput
 }
 
@@ -566,7 +684,8 @@ export type AcademicGroupUncheckedCreateWithoutStudentsInput = {
   id?: string
   name: string
   level: number
-  departmentId: string
+  programId: string
+  departmentId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   offerings?: Prisma.CourseOfferingUncheckedCreateNestedManyWithoutAcademicGroupInput
@@ -594,7 +713,8 @@ export type AcademicGroupUpdateWithoutStudentsInput = {
   level?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  department?: Prisma.DepartmentUpdateOneRequiredWithoutGroupsNestedInput
+  program?: Prisma.ProgramUpdateOneRequiredWithoutGroupsNestedInput
+  department?: Prisma.DepartmentUpdateOneWithoutGroupsNestedInput
   offerings?: Prisma.CourseOfferingUpdateManyWithoutAcademicGroupNestedInput
 }
 
@@ -602,7 +722,8 @@ export type AcademicGroupUncheckedUpdateWithoutStudentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   level?: Prisma.IntFieldUpdateOperationsInput | number
-  departmentId?: Prisma.StringFieldUpdateOperationsInput | string
+  programId?: Prisma.StringFieldUpdateOperationsInput | string
+  departmentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   offerings?: Prisma.CourseOfferingUncheckedUpdateManyWithoutAcademicGroupNestedInput
@@ -614,7 +735,8 @@ export type AcademicGroupCreateWithoutOfferingsInput = {
   level: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  department: Prisma.DepartmentCreateNestedOneWithoutGroupsInput
+  program: Prisma.ProgramCreateNestedOneWithoutGroupsInput
+  department?: Prisma.DepartmentCreateNestedOneWithoutGroupsInput
   students?: Prisma.UserCreateNestedManyWithoutAcademicGroupInput
 }
 
@@ -622,7 +744,8 @@ export type AcademicGroupUncheckedCreateWithoutOfferingsInput = {
   id?: string
   name: string
   level: number
-  departmentId: string
+  programId: string
+  departmentId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   students?: Prisma.UserUncheckedCreateNestedManyWithoutAcademicGroupInput
@@ -650,7 +773,8 @@ export type AcademicGroupUpdateWithoutOfferingsInput = {
   level?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  department?: Prisma.DepartmentUpdateOneRequiredWithoutGroupsNestedInput
+  program?: Prisma.ProgramUpdateOneRequiredWithoutGroupsNestedInput
+  department?: Prisma.DepartmentUpdateOneWithoutGroupsNestedInput
   students?: Prisma.UserUpdateManyWithoutAcademicGroupNestedInput
 }
 
@@ -658,7 +782,8 @@ export type AcademicGroupUncheckedUpdateWithoutOfferingsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   level?: Prisma.IntFieldUpdateOperationsInput | number
-  departmentId?: Prisma.StringFieldUpdateOperationsInput | string
+  programId?: Prisma.StringFieldUpdateOperationsInput | string
+  departmentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   students?: Prisma.UserUncheckedUpdateManyWithoutAcademicGroupNestedInput
@@ -668,6 +793,7 @@ export type AcademicGroupCreateManyDepartmentInput = {
   id?: string
   name: string
   level: number
+  programId: string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -678,6 +804,7 @@ export type AcademicGroupUpdateWithoutDepartmentInput = {
   level?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  program?: Prisma.ProgramUpdateOneRequiredWithoutGroupsNestedInput
   students?: Prisma.UserUpdateManyWithoutAcademicGroupNestedInput
   offerings?: Prisma.CourseOfferingUpdateManyWithoutAcademicGroupNestedInput
 }
@@ -686,6 +813,7 @@ export type AcademicGroupUncheckedUpdateWithoutDepartmentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   level?: Prisma.IntFieldUpdateOperationsInput | number
+  programId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   students?: Prisma.UserUncheckedUpdateManyWithoutAcademicGroupNestedInput
@@ -696,6 +824,47 @@ export type AcademicGroupUncheckedUpdateManyWithoutDepartmentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   level?: Prisma.IntFieldUpdateOperationsInput | number
+  programId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type AcademicGroupCreateManyProgramInput = {
+  id?: string
+  name: string
+  level: number
+  departmentId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type AcademicGroupUpdateWithoutProgramInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  level?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.DepartmentUpdateOneWithoutGroupsNestedInput
+  students?: Prisma.UserUpdateManyWithoutAcademicGroupNestedInput
+  offerings?: Prisma.CourseOfferingUpdateManyWithoutAcademicGroupNestedInput
+}
+
+export type AcademicGroupUncheckedUpdateWithoutProgramInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  level?: Prisma.IntFieldUpdateOperationsInput | number
+  departmentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  students?: Prisma.UserUncheckedUpdateManyWithoutAcademicGroupNestedInput
+  offerings?: Prisma.CourseOfferingUncheckedUpdateManyWithoutAcademicGroupNestedInput
+}
+
+export type AcademicGroupUncheckedUpdateManyWithoutProgramInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  level?: Prisma.IntFieldUpdateOperationsInput | number
+  departmentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -744,10 +913,12 @@ export type AcademicGroupSelect<ExtArgs extends runtime.Types.Extensions.Interna
   id?: boolean
   name?: boolean
   level?: boolean
+  programId?: boolean
   departmentId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  department?: boolean | Prisma.DepartmentDefaultArgs<ExtArgs>
+  program?: boolean | Prisma.ProgramDefaultArgs<ExtArgs>
+  department?: boolean | Prisma.AcademicGroup$departmentArgs<ExtArgs>
   students?: boolean | Prisma.AcademicGroup$studentsArgs<ExtArgs>
   offerings?: boolean | Prisma.AcademicGroup$offeringsArgs<ExtArgs>
   _count?: boolean | Prisma.AcademicGroupCountOutputTypeDefaultArgs<ExtArgs>
@@ -757,49 +928,58 @@ export type AcademicGroupSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   id?: boolean
   name?: boolean
   level?: boolean
+  programId?: boolean
   departmentId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  department?: boolean | Prisma.DepartmentDefaultArgs<ExtArgs>
+  program?: boolean | Prisma.ProgramDefaultArgs<ExtArgs>
+  department?: boolean | Prisma.AcademicGroup$departmentArgs<ExtArgs>
 }, ExtArgs["result"]["academicGroup"]>
 
 export type AcademicGroupSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
   level?: boolean
+  programId?: boolean
   departmentId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  department?: boolean | Prisma.DepartmentDefaultArgs<ExtArgs>
+  program?: boolean | Prisma.ProgramDefaultArgs<ExtArgs>
+  department?: boolean | Prisma.AcademicGroup$departmentArgs<ExtArgs>
 }, ExtArgs["result"]["academicGroup"]>
 
 export type AcademicGroupSelectScalar = {
   id?: boolean
   name?: boolean
   level?: boolean
+  programId?: boolean
   departmentId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type AcademicGroupOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "level" | "departmentId" | "createdAt" | "updatedAt", ExtArgs["result"]["academicGroup"]>
+export type AcademicGroupOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "level" | "programId" | "departmentId" | "createdAt" | "updatedAt", ExtArgs["result"]["academicGroup"]>
 export type AcademicGroupInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  department?: boolean | Prisma.DepartmentDefaultArgs<ExtArgs>
+  program?: boolean | Prisma.ProgramDefaultArgs<ExtArgs>
+  department?: boolean | Prisma.AcademicGroup$departmentArgs<ExtArgs>
   students?: boolean | Prisma.AcademicGroup$studentsArgs<ExtArgs>
   offerings?: boolean | Prisma.AcademicGroup$offeringsArgs<ExtArgs>
   _count?: boolean | Prisma.AcademicGroupCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type AcademicGroupIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  department?: boolean | Prisma.DepartmentDefaultArgs<ExtArgs>
+  program?: boolean | Prisma.ProgramDefaultArgs<ExtArgs>
+  department?: boolean | Prisma.AcademicGroup$departmentArgs<ExtArgs>
 }
 export type AcademicGroupIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  department?: boolean | Prisma.DepartmentDefaultArgs<ExtArgs>
+  program?: boolean | Prisma.ProgramDefaultArgs<ExtArgs>
+  department?: boolean | Prisma.AcademicGroup$departmentArgs<ExtArgs>
 }
 
 export type $AcademicGroupPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "AcademicGroup"
   objects: {
-    department: Prisma.$DepartmentPayload<ExtArgs>
+    program: Prisma.$ProgramPayload<ExtArgs>
+    department: Prisma.$DepartmentPayload<ExtArgs> | null
     students: Prisma.$UserPayload<ExtArgs>[]
     offerings: Prisma.$CourseOfferingPayload<ExtArgs>[]
   }
@@ -807,7 +987,8 @@ export type $AcademicGroupPayload<ExtArgs extends runtime.Types.Extensions.Inter
     id: string
     name: string
     level: number
-    departmentId: string
+    programId: string
+    departmentId: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["academicGroup"]>
@@ -1204,7 +1385,8 @@ readonly fields: AcademicGroupFieldRefs;
  */
 export interface Prisma__AcademicGroupClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  department<T extends Prisma.DepartmentDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DepartmentDefaultArgs<ExtArgs>>): Prisma.Prisma__DepartmentClient<runtime.Types.Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  program<T extends Prisma.ProgramDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProgramDefaultArgs<ExtArgs>>): Prisma.Prisma__ProgramClient<runtime.Types.Result.GetResult<Prisma.$ProgramPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  department<T extends Prisma.AcademicGroup$departmentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AcademicGroup$departmentArgs<ExtArgs>>): Prisma.Prisma__DepartmentClient<runtime.Types.Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   students<T extends Prisma.AcademicGroup$studentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AcademicGroup$studentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   offerings<T extends Prisma.AcademicGroup$offeringsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AcademicGroup$offeringsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CourseOfferingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
@@ -1239,6 +1421,7 @@ export interface AcademicGroupFieldRefs {
   readonly id: Prisma.FieldRef<"AcademicGroup", 'String'>
   readonly name: Prisma.FieldRef<"AcademicGroup", 'String'>
   readonly level: Prisma.FieldRef<"AcademicGroup", 'Int'>
+  readonly programId: Prisma.FieldRef<"AcademicGroup", 'String'>
   readonly departmentId: Prisma.FieldRef<"AcademicGroup", 'String'>
   readonly createdAt: Prisma.FieldRef<"AcademicGroup", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"AcademicGroup", 'DateTime'>
@@ -1640,6 +1823,25 @@ export type AcademicGroupDeleteManyArgs<ExtArgs extends runtime.Types.Extensions
    * Limit how many AcademicGroups to delete.
    */
   limit?: number
+}
+
+/**
+ * AcademicGroup.department
+ */
+export type AcademicGroup$departmentArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Department
+   */
+  select?: Prisma.DepartmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Department
+   */
+  omit?: Prisma.DepartmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DepartmentInclude<ExtArgs> | null
+  where?: Prisma.DepartmentWhereInput
 }
 
 /**

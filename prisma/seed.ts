@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { execSync } from "child_process";
 import fs from "fs";
 import path from "path";
 
@@ -7,11 +8,22 @@ const main = async () => {
   const sqlFiles = [
     "1_Institution.sql",
     "2_Department.sql",
-    "3_Course.sql",
+    "3_Programs.sql",
     "4_AcademicGroup.sql",
   ];
 
+  console.log("Cleaning up old data spaces cleanly...");
+
+  // wipe out the schema entirely
+  await prisma.$executeRawUnsafe(
+    `DROP SCHEMA public CASCADE; CREATE SCHEMA public;`,
+  );
+
+  console.log("🛠️ Syncing database tables structural layout...");
+  execSync("npx prisma db push", { stdio: "inherit" });
+
   for (const file of sqlFiles) {
+    console.log("Running fresh seed scripts...");
     // Locate file path
     const sqlPath = path.join(process.cwd(), "prisma", "sql", file);
 
@@ -35,7 +47,7 @@ const main = async () => {
         const fixedStatement = statement
           .replace(/insert into Institution/g, 'insert into "Institution"')
           .replace(/insert into Department/g, 'insert into "Department"')
-          .replace(/insert into Course/g, 'insert into "Course"')
+          .replace(/insert into Program/g, 'insert into "Program"')
           .replace(/insert into AcademicGroup/g, 'insert into "AcademicGroup"');
 
         await prisma.$executeRawUnsafe(`${fixedStatement}`);
