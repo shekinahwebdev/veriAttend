@@ -28,6 +28,11 @@ export type Institution = Prisma.InstitutionModel
  */
 export type Department = Prisma.DepartmentModel
 /**
+ * Model Program
+ * 
+ */
+export type Program = Prisma.ProgramModel
+/**
  * Model AcademicGroup
  * 
  */
